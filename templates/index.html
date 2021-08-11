@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="utf-8">
@@ -21,113 +21,88 @@
     <div class="overlay">
         <div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>
     </div>
-    <h2> Deep Learning in Action </h2>
+    <h2> NLP TASK Using BERT </h2>
     <div class="row">
         <div class="col-sm-1"></div>
 
         <div class="col-sm-10">
             <center>
-                <h3>Word Prediction with Transformers</h3>
+                <h3>B반 3조 AAC</h3>
             </center>
             <div class="form-row">
-                <div class="form-group col-md-8">
+                <div class="form-group col-md-10">
                     <br>
-                    <h4>Type a word and press space to get suggestions</h4>
-                </div>
-                <div class="form-group col-md-4">
-                    <br>
-                    <label for="max_words" id="label_max_words">Top k words: 5</label>
-                    <input type="range" class="custom-range" min="1" max="10" value="5" step="1" id="max_words">
+                    <h4>문장</h4>
                 </div>
             </div>
-
             <div class="form-row">
-                <textarea class="form-control txt_input" id="input_text" rows="1"></textarea>
+                <div class="form-group col-md-9">
+                    <textarea class="form-control txt_input" id="mask_input_text" rows="1"></textarea>
+                </div>
+                <div class="form-group col-md-3">
+                    <label></label>
+                    <button type="button" class="btn btn-primary btn-lg" id="btn-process">predict</button>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-1">
+                    <label></label>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-#">#</button>
+                </div>
+                <div class="form-group col-md-3">
+                    <label></label>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-cate">카테고리</button>
+                </div>
+                <div class="form-group col-md-3">
+                    <label></label>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-half">반/존대</button>
+                </div>
+                <div class="form-group col-md-2">
+                    <label></label>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-num">숫자</button>
+                </div>
+                <div class="form-group col-md-1">
+                    <label></label>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process.">.</button>
+                </div>
+                <div class="form-group col-md-1">
+                    <label></label>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process?">?</button>
+                </div>
+                <div class="form-group col-md-1">
+                    <label></label>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process!">!</button>
+                </div>
             </div>
 
-            <h4> Predictions </h4>
+            <h4> 다음 단어 이미지 </h4>
             <div class="form-row">
                 <div class="form-group col-md-2">
-                    <label for="text_paragraphs">BERT</label>
+                    <label for="text_paragraphs">image</label>
                     <textarea class="form-control txt_response" id="text_bert" readonly></textarea>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="text_paragraphs">XLNET</label>
+                    <label for="text_paragraphs">image2</label>
                     <textarea class="form-control txt_response" id="text_xlnet" readonly></textarea>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="text_paragraphs">XLM-Roberta</label>
+                    <label for="text_paragraphs">image</label>
                     <textarea class="form-control txt_response" id="text_xlm" readonly></textarea>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="text_paragraphs">BART</label>
+                    <label for="text_paragraphs">image</label>
                     <textarea class="form-control txt_response" id="text_bart" readonly></textarea>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="text_paragraphs">ELECTRA</label>
+                    <label for="text_paragraphs">image</label>
                     <textarea class="form-control txt_response" id="text_electra" readonly></textarea>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="text_paragraphs">ROBERTA</label>
+                    <label for="text_paragraphs">image</label>
                     <textarea class="form-control txt_response" id="text_roberta" readonly></textarea>
                 </div>
             </div>
             <hr>
-
-            <!-- MASKED PREDICTION -->
-            <center>
-                <h3>Masked Word Prediction</h3>
-            </center>
-
-            <div class="form-row">
-                <div class="form-group col-md-8">
-                    <br>
-                    <h4>Type a sentence, include &lt;mask&gt; to predict the word and hit Predict.</h4>
-                </div>
-                <div class="form-group col-md-2">
-                    <br>
-                    <label for="max_words" id="label_max_words">Top k words: 5</label>
-                    <input type="range" class="custom-range" min="1" max="10" value="5" step="1" id="max_words_mask">
-                </div>
-                <div class="form-group col-md-2">
-                    <label></label>
-                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process">Predict</button>
-                </div>
-            </div>
-            <div class="form-row">
-                <textarea class="form-control txt_input" id="mask_input_text" rows="1"></textarea>
-            </div>
-
-            <h4> Predictions </h4>
-            <div class="form-row">
-                <div class="form-group col-md-2">
-                    <label for="text_paragraphs">BERT</label>
-                    <textarea class="form-control txt_response" id="mask_text_bert" readonly rows="1"></textarea>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="text_paragraphs">XLNET</label>
-                    <textarea class="form-control txt_response" id="mask_text_xlnet" readonly></textarea>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="text_paragraphs">XLM-Roberta</label>
-                    <textarea class="form-control txt_response" id="mask_text_xlm" readonly></textarea>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="text_paragraphs">BART</label>
-                    <textarea class="form-control txt_response" id="mask_text_bart" readonly></textarea>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="text_paragraphs">ELECTRA</label>
-                    <textarea class="form-control txt_response" id="mask_text_electra" readonly></textarea>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="text_paragraphs">ROBERTA</label>
-                    <textarea class="form-control txt_response" id="mask_text_roberta" readonly></textarea>
-                </div>
-            </div>
-
-
-
         </div>
         <div class="col-sm-1"></div>
     </div>
