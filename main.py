@@ -27,7 +27,7 @@ def encode(tokenizer, text_sentence, add_special_tokens=True, mask_token='[MASK]
     return input_ids, mask_idx
 
 
-def get_all_predictions(text_sentence, top_k=10, top_clean=10):
+def get_all_predictions(text_sentence, top_k=50, top_clean=50):
     # ========================= BERT =================================
     print(text_sentence)
     input_ids, mask_idx = encode(bert_tokenizer, text_sentence)

@@ -3,7 +3,7 @@ from flask import Flask, request, render_template
 import json
 import main
 
-#  C:\Users\choi\PycharmProjects\next_word_prediction
+
 app = Flask(__name__)
 
 
@@ -12,18 +12,11 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/get_end_predictions', methods=['post'])
+@app.route('/get_end_predictions.html', methods=['post'])
 def get_prediction_eos():
     try:
         input_text = ' '.join(request.json['input_text'].split())
-        if input_text[-1] == '?':
-            input_text += ' <mask>?'
-        elif input_text[-1] == '!':
-            input_text += ' <mask>!'
-        elif input_text[-1] == '.':
-            input_text += ' <mask>.'
-        else:
-            input_text += ' <mask> #'
+        input_text += ' <mask> #'
         top_k = request.json['top_k']
         res = main.get_all_predictions(input_text, top_clean=int(top_k))
         return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
@@ -33,11 +26,53 @@ def get_prediction_eos():
         return app.response_class(response=json.dumps(err), status=500, mimetype='application/json')
 
 
-
-@app.route('/get_mask_predictions', methods=['post'])
-def get_prediction_mask():
+@app.route('/get_end_predictions_jum.html', methods=['post'])
+def get_prediction_eos_jum():
     try:
         input_text = ' '.join(request.json['input_text'].split())
+        input_text += ' <mask>.'
+        top_k = request.json['top_k']
+        res = main.get_all_predictions(input_text, top_clean=int(top_k))
+        return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
+    except Exception as error:
+        err = str(error)
+        print(err)
+        return app.response_class(response=json.dumps(err), status=500, mimetype='application/json')
+
+
+@app.route('/get_end_predictions_question.html', methods=['post'])
+def get_prediction_eos_question():
+    try:
+        input_text = ' '.join(request.json['input_text'].split())
+        input_text += ' <mask>?'
+        top_k = request.json['top_k']
+        res = main.get_all_predictions(input_text, top_clean=int(top_k))
+        return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
+    except Exception as error:
+        err = str(error)
+        print(err)
+        return app.response_class(response=json.dumps(err), status=500, mimetype='application/json')
+
+
+@app.route('/get_end_predictions_nuggimpyo.html', methods=['post'])
+def get_prediction_eos_nuggimpyo():
+    try:
+        input_text = ' '.join(request.json['input_text'].split())
+        input_text += ' <mask>!'
+        top_k = request.json['top_k']
+        res = main.get_all_predictions(input_text, top_clean=int(top_k))
+        return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
+    except Exception as error:
+        err = str(error)
+        print(err)
+        return app.response_class(response=json.dumps(err), status=500, mimetype='application/json')
+
+
+@app.route('/get_end_predictions_init.html', methods=['post'])
+def get_prediction_eos_init():
+    try:
+        input_text = ' '.join(request.json['input_text'].split())
+        input_text += ' <mask> #'
         top_k = request.json['top_k']
         res = main.get_all_predictions(input_text, top_clean=int(top_k))
         return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')

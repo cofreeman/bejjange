@@ -13,7 +13,98 @@
     <script src="../static/js/app.js"></script>
 
 
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300|Oxygen|Material+Icons" rel="stylesheet">
+<!--    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300|Oxygen|Material+Icons" rel="stylesheet">-->
+<!--    &lt;!&ndash;[edit]&ndash;&gt;-->
+<!--    <script>-->
+<!--        window.onload=function() {-->
+<!--         document.getElementById("predict1").onclick=processText;-->
+<!--         document.getElementById("predict2").onclick=processText2;-->
+<!--         document.getElementById("predict3").onclick=processText3;-->
+<!--         document.getElementById("predict4").onclick=processText4;-->
+<!--         document.getElementById("predict5").onclick=processText5;-->
+<!--        }-->
+
+<!--        function processText() {-->
+<!--         var txtBox = document.getElementById("predict1");-->
+<!--         var word = txtBox.value.split("\n");-->
+
+<!--         // generate HTML version of text-->
+<!--         var resultString  = "";-->
+<!--         for (var i = 0; i < lines.length; i++) {-->
+<!--           resultString += lines[i];-->
+<!--         }-->
+<!--         resultString += "";-->
+
+<!--         // print out to page-->
+<!--         var blk  = document.getElementById("output_text");-->
+<!--         blk.innerHTML  =  resultString;-->
+<!--        }-->
+
+<!--        function processText2() {-->
+<!--         var txtBox = document.getElementById("predict2");-->
+<!--         var lines = txtBox.value.split("\n");-->
+
+<!--         // generate HTML version of text-->
+<!--         var resultString  = "";-->
+<!--         for (var i = 0; i < lines.length; i++) {-->
+<!--           resultString += lines[i];-->
+<!--         }-->
+<!--         resultString += "";-->
+
+<!--         // print out to page-->
+<!--         var blk  = document.getElementById("output_text");-->
+<!--         blk.innerHTML  =  resultString;-->
+<!--        }-->
+
+<!--        function processText3() {-->
+<!--         var txtBox = document.getElementById("predict3");-->
+<!--         var lines = txtBox.value.split("\n");-->
+
+<!--         // generate HTML version of text-->
+<!--         var resultString  = "";-->
+<!--         for (var i = 0; i < lines.length; i++) {-->
+<!--           resultString += lines[i];-->
+<!--         }-->
+<!--         resultString += "";-->
+
+<!--         // print out to page-->
+<!--         var blk  = document.getElementById("output_text");-->
+<!--         blk.innerHTML  =  resultString;-->
+<!--        }-->
+
+<!--        function processText4() {-->
+<!--         var txtBox = document.getElementById("predict4");-->
+<!--         var lines = txtBox.value.split("\n");-->
+
+<!--         // generate HTML version of text-->
+<!--         var resultString  = "";-->
+<!--         for (var i = 0; i < lines.length; i++) {-->
+<!--           resultString += lines[i];-->
+<!--         }-->
+<!--         resultString += "";-->
+
+<!--         // print out to page-->
+<!--         var blk  = document.getElementById("output_text");-->
+<!--         blk.innerHTML  =  resultString;-->
+<!--        }-->
+
+<!--        function processText5() {-->
+<!--         var txtBox = document.getElementById("predict5");-->
+<!--         var lines = txtBox.value.split("\n");-->
+
+<!--         // generate HTML version of text-->
+<!--         var resultString  = "";-->
+<!--         for (var i = 0; i < lines.length; i++) {-->
+<!--           resultString += lines[i];-->
+<!--         }-->
+<!--         resultString += "";-->
+
+<!--         // print out to page-->
+<!--         var blk  = document.getElementById("output_text");-->
+<!--         blk.innerHTML  =  resultString;-->
+<!--        }-->
+<!--    </script>-->
+<!--    &lt;!&ndash;[edit]&ndash;&gt;-->
 </head>
 
 
@@ -29,6 +120,19 @@
             <center>
                 <h3>B반 3조 AAC</h3>
             </center>
+            <!--[edit]-->
+            <div class="form-row">
+                <div class="form-group col-md-10">
+                    <br>
+                    <h4>완성된 문장</h4>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-9">
+                    <textarea class="form-control txt_input" id="output_text" rows="1"></textarea>
+                </div>
+            </div>
+            <!--[edit]-->
             <div class="form-row">
                 <div class="form-group col-md-10">
                     <br>
@@ -41,18 +145,11 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label></label>
-                    <button type="button" class="btn btn-primary btn-lg" id="btn-process">predict</button>
+                    <button type="button" class="btn btn-primary btn-lg" id="btn-process-prediction">predict</button>
                 </div>
-            </div>
-            <div class="form-group col-md-4">
-                <br>
-                <label for="max_words" id="label_max_words">Top k words: 5</label>
-                <input type="range" class="custom-range" min="1" max="10" value="5" step="1" id="max_words">
-            </div>
-            <div class="form-row">
                 <div class="form-group col-md-1">
                     <label></label>
-                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-#">#</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-init">init</button>
                 </div>
                 <div class="form-group col-md-3">
                     <label></label>
@@ -68,17 +165,19 @@
                 </div>
                 <div class="form-group col-md-1">
                     <label></label>
-                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process.">.</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-jum">.</button>
                 </div>
                 <div class="form-group col-md-1">
                     <label></label>
-                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process?">?</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-question">?</button>
                 </div>
                 <div class="form-group col-md-1">
                     <label></label>
-                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process!">!</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-nuggimpyo">!</button>
                 </div>
             </div>
+
+
 
             <h4> 다음 단어 이미지 </h4>
             <div class="form-row">
@@ -101,6 +200,9 @@
                     <textarea class="form-control txt_response" id="predict-more" readonly></textarea>
                 </div>
             </div>
+
+
+
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <textarea class="form-control txt_response" id="predict11" readonly></textarea>
