@@ -36,3 +36,6 @@ def get_all_predictions(text_sentence, top_k=50, top_clean=50):
     bert = decode(bert_tokenizer, predict[0, mask_idx, :].topk(top_k).indices.tolist(), top_clean)
 
     return {'bert': bert}
+
+def init_word():
+    return {'bert': '나는 저는 '}

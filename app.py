@@ -71,10 +71,7 @@ def get_prediction_eos_nuggimpyo():
 @app.route('/get_end_predictions_init.html', methods=['post'])
 def get_prediction_eos_init():
     try:
-        input_text = ' '.join(request.json['input_text'].split())
-        input_text += ' <mask> #'
-        top_k = request.json['top_k']
-        res = main.get_all_predictions(input_text, top_clean=int(top_k))
+        res = main.init_word()
         return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
     except Exception as error:
         err = str(error)

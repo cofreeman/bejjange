@@ -94,7 +94,7 @@ jQuery(document).ready(function () {
     })
     $('#btn-process-init').on('click', function () {
         $.ajax({
-            url: '/get_end_predictions-init.html',
+            url: '/get_end_predictions_init.html',
             type: "post",
             contentType: "application/json",
             dataType: "json",
