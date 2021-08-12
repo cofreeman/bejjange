@@ -6,8 +6,9 @@ from transformers import BertTokenizer, BertForMaskedLM
 bert_tokenizer = BertTokenizer.from_pretrained('kykim/bert-kor-base')
 bert_model = BertForMaskedLM.from_pretrained('kykim/bert-kor-base').eval()
 
+
 def decode(tokenizer, pred_idx, top_clean):
-    ignore_tokens = string.punctuation + '[PAD]'
+    ignore_tokens = string.punctuation + '[PAD][UNK]<pad><unk> '
     tokens = []
     for w in pred_idx:
         token = ''.join(tokenizer.decode(w).split())
@@ -26,7 +27,7 @@ def encode(tokenizer, text_sentence, add_special_tokens=True, mask_token='[MASK]
     return input_ids, mask_idx
 
 
-def get_all_predictions(text_sentence, top_k=50, top_clean=5):
+def get_all_predictions(text_sentence, top_k=10, top_clean=10):
     # ========================= BERT =================================
     print(text_sentence)
     input_ids, mask_idx = encode(bert_tokenizer, text_sentence)
