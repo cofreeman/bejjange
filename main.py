@@ -38,4 +38,4 @@ def get_all_predictions(text_sentence, top_k=50, top_clean=50):
     return {'bert': bert}
 
 def init_word():
-    return {'bert': '나는 저는 '}
+    return {'bert': '제가 저는 당신은 이제 '}
