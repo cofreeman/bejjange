@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ko">
+<html lang="ko" xmlns:https="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -12,98 +12,16 @@
     <script src="../static/js/bootstrap-suggest.js"></script>
     <script src="../static/js/app.js"></script>
 
+    <script>
+        $(function(){
+            $('#go_home').click(function(){
+                location.href = 'main.html';
+            });
+        });
+    </script>
 <!--    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Open+Sans:300|Oxygen|Material+Icons" rel="stylesheet">-->
 <!--    &lt;!&ndash;[edit]&ndash;&gt;-->
-<!--    <script>-->
-<!--        window.onload=function() {-->
-<!--         document.getElementById("predict1").onclick=processText1;-->
-<!--         document.getElementById("predict2").onclick=processText2;-->
-<!--         document.getElementById("predict3").onclick=processText3;-->
-<!--         document.getElementById("predict4").onclick=processText4;-->
-<!--         document.getElementById("predict5").onclick=processText5;-->
-<!--        }-->
 
-<!--        function processText1() {-->
-<!--         var txtBox = document.getElementById("predict1");-->
-<!--         var lines = txtBox.value.split("\n");-->
-
-<!--         // generate HTML version of text-->
-<!--         var resultString  = "";-->
-<!--         for (var i = 0; i < lines.length; i++) {-->
-<!--           resultString += lines[i];-->
-<!--         }-->
-<!--         resultString += "";-->
-
-<!--         // print out to page-->
-<!--         var blk  = document.getElementById("input_text");-->
-<!--         blk.innerHTML  =  resultString;-->
-<!--        }-->
-
-<!--        function processText2() {-->
-<!--         var txtBox = document.getElementById("predict2");-->
-<!--         var lines = txtBox.value.split("\n");-->
-
-<!--         // generate HTML version of text-->
-<!--         var resultString  = "";-->
-<!--         for (var i = 0; i < lines.length; i++) {-->
-<!--           resultString += lines[i];-->
-<!--         }-->
-<!--         resultString += "";-->
-
-<!--         // print out to page-->
-<!--         var blk  = document.getElementById("input_text");-->
-<!--         blk.innerHTML  =  resultString;-->
-<!--        }-->
-
-<!--        function processText3() {-->
-<!--         var txtBox = document.getElementById("predict3");-->
-<!--         var lines = txtBox.value.split("\n");-->
-
-<!--         // generate HTML version of text-->
-<!--         var resultString  = "";-->
-<!--         for (var i = 0; i < lines.length; i++) {-->
-<!--           resultString += lines[i];-->
-<!--         }-->
-<!--         resultString += "";-->
-
-<!--         // print out to page-->
-<!--         var blk  = document.getElementById("input_text");-->
-<!--         blk.innerHTML  =  resultString;-->
-<!--        }-->
-
-<!--        function processText4() {-->
-<!--         var txtBox = document.getElementById("predict4");-->
-<!--         var lines = txtBox.value.split("\n");-->
-
-<!--         // generate HTML version of text-->
-<!--         var resultString  = "";-->
-<!--         for (var i = 0; i < lines.length; i++) {-->
-<!--           resultString += lines[i];-->
-<!--         }-->
-<!--         resultString += "";-->
-
-<!--         // print out to page-->
-<!--         var blk  = document.getElementById("input_text");-->
-<!--         blk.innerHTML  =  resultString;-->
-<!--        }-->
-
-<!--        function processText5() {-->
-<!--         var txtBox = document.getElementById("predict5");-->
-<!--         var lines = txtBox.value.split("\n");-->
-
-<!--         // generate HTML version of text-->
-<!--         var resultString  = "";-->
-<!--         for (var i = 0; i < lines.length; i++) {-->
-<!--           resultString += lines[i];-->
-<!--         }-->
-<!--         resultString += "";-->
-
-<!--         // print out to page-->
-<!--         var blk  = document.getElementById("input_text");-->
-<!--         blk.innerHTML  =  resultString;-->
-<!--        }-->
-<!--    </script>-->
-    <!--[edit]-->
 </head>
 
 
@@ -112,7 +30,8 @@
     <div class="overlay">
         <div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>
     </div>
-
+    <!--<input type="button" value="뒤로가기" onclick="history.back(-1);">-->
+    <button type="button" id="go_home">메인 페이지</button>
     <h2> NLP TASK Using BERT </h2>
     <div class="row">
         <div class="col-sm-1"></div>
@@ -138,6 +57,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label></label>
+                    <button type="button" class="btn btn-primary btn-lg" onClick="window.location.reload()" id="init_text">문장 전체 초기화</button>
                     <button type="button" class="btn btn-primary btn-lg" id="btn-process-prediction">predict</button>
                 </div>
                 <div class="form-group col-md-1">
