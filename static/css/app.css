@@ -4,13 +4,37 @@
 	position: absolute;
 	text-align: center;
 	display: none;
-	z-index: 1000 !important;
+	z-index: 1;
 	/* background: #ccc8; */
 }
 
 .spinner-border {
 	top: 50% !important;
 	position: absolute;
+}
+html,body{width:100%;height:100%;}
+.dialog{
+    border:10px solid black;
+    background:white;
+    color:#fff;
+    position: absolute;
+    width:95%;
+    left:50%; top:30%;
+    transform:translate(-50%,50%);
+    display: none;
+    z-index: 3;
+}
+}
+body:after{
+    content:'';
+    position:absolute;
+    background:rgba(0,0,0,.7);
+    left:0;right:0;top:50%;bottom:0;
+    display:none;
+    z-index: 2;
+}
+body.active:after{
+    display:block;
 }
 
 h2 {

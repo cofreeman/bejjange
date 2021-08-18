@@ -11,6 +11,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+
 @app.route('/mainpage')
 def mainpage():
     return render_template('main.html')
@@ -81,6 +82,7 @@ def get_prediction_eos_init():
         err = str(error)
         print(err)
         return app.response_class(response=json.dumps(err), status=500, mimetype='application/json')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=8000, use_reloader=False)

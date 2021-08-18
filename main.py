@@ -118,4 +118,4 @@ def image_crawler(trans_result):
 
 
 def init_word():
-    return {'bert': '나는 저는 '}
+    return {'bert': '나는 저는 이제 우리 역시 그러면 너는 당신은 우리 제가 혹시'}
