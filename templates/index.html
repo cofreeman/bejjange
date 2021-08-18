@@ -13,9 +13,7 @@
     <script src="../static/js/bootstrap-suggest.js"></script>
     <script src="../static/js/app.js"></script>
 
-
 </head>
-
 
 
 <body>
@@ -53,12 +51,87 @@
     </div>
     <div class="dialog2">
         <div class="form-row">
-            <button class="col-md-6" type="button" style="background-color:white;" id="img-cate1"><img  src="https://static.arasaac.org/pictograms/2340/2340_2500.png" style="max-width: 100%; height: auto;"></button>
-            <button class="col-md-6" type="button" style="background-color:white;" id="img-cate2"><img  src="https://static.arasaac.org/pictograms/2296/2296_hair-020100_skin-F4ECAD_500.png" style="max-width: 100%; height: auto;"></button>
-            <button class="col-md-6" type="button" style="background-color:white;" id="img-cate3"><img  src="https://static.arasaac.org/pictograms/2340/2340_2500.png" style="max-width: 100%; height: auto;"></button>
-            <button class="col-md-6" type="button" style="background-color:white;" id="img-cate4"><img  src="https://static.arasaac.org/pictograms/2296/2296_hair-020100_skin-F4ECAD_500.png" style="max-width: 100%; height: auto;"></button>
+            <textarea class="form-control txt_response col-md-12" rows="1" readonly>원하시는 장소를 선택해주세요</textarea>
+            <button class="col-md-12 close-button" type="button" style="background-color:white;" id="btn-close-cate">CLOSE</button>
+            <button class="col-md-3" type="button" style="background-color:white;" id="img-btn-cafe"><img  src="https://image.istarbucks.co.kr/cardImg/20201208/007754_WEB.png" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-3" type="button" style="background-color:white;" id="img-btn-movie"><img  src="https://w7.pngwing.com/pngs/364/782/png-transparent-cinematography-film-cinematography-logo-film-poster-film.png" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-3" type="button" style="background-color:white;" id="img-btn-store"><img  src="https://png.pngtree.com/png-clipart/20190516/original/pngtree-vector-shop-icon-png-image_3762863.jpg" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-3" type="button" style="background-color:white;" id="img-btn-hospital"><img  src="https://png.pngtree.com/element_origin_min_pic/17/01/09/3159ad520656ecd29d070744b0d78a7d.jpg" style="max-width: 100%; height: auto;"></button>
+
+            <textarea class="form-control txt_response col-md-3" id="cate-text1" rows="1" readonly>카페</textarea>
+            <textarea class="form-control txt_response col-md-3" id="cate-text2" rows="1" readonly>영화관</textarea>
+            <textarea class="form-control txt_response col-md-3" id="cate-text3" rows="1" readonly>가게</textarea>
+            <textarea class="form-control txt_response col-md-3" id="cate-text4" rows="1" readonly>병원</textarea>
+
         </div>
     </div>
+    <div class="dialog-cafe">
+        <div class="form-row">
+            <button class="col-md-12 close-button" type="button" style="background-color:white;" id="btn-close-cate-cate">CLOSE</button>
+            <textarea class="form-control col-md-2" id="cate-cafe-text1" rows="1" >아메리카노</textarea>
+            <textarea class="form-control col-md-2" id="cate-cafe-text2" rows="1" >계산</textarea>
+            <textarea class="form-control col-md-2" id="cate-cafe-text3" rows="1" >시럽</textarea>
+            <textarea class="form-control col-md-2" id="cate-cafe-text4" rows="1" >영수증</textarea>
+            <textarea class="form-control col-md-2" id="cate-cafe-text5" rows="1" >샷</textarea>
+            <textarea class="form-control col-md-2" id="cate-cafe-text6" rows="1" >텀블러</textarea>
+
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-cate1"><img  src="https://cdn.crowdpic.net/list-thumb/thumb_l_269080D6504E619FDB5E2B0965196CC1.png" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-cate2"><img  src="static/img/cate/cate-cafe/계산해요.jpg" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-cate3"><img  src="static/img/cate/cate-cafe/시럽.jpg" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-cate4"><img  src="static/img/cate/cate-cafe/영수증.jpg" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-cate5"><img  src="static/img/cate/cate-cafe/커피 샷.jpg" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-cate6"><img  src="static/img/cate/cate-cafe/텀블러.jpg" style="max-width: 100%; height: auto;"></button>
+
+            <textarea class="form-control txt_response col-md-2" id="cate-cafe-text7" rows="1" readonly>테이크아웃</textarea>
+            <textarea class="form-control txt_response col-md-2" id="cate-cafe-text8" rows="1" readonly>현금</textarea>
+            <textarea class="form-control txt_response col-md-2" id="cate-cafe-text9" rows="1" readonly>카드</textarea>
+            <textarea class="form-control txt_response col-md-2" id="cate-cafe-text10" rows="1" readonly>얼음</textarea>
+            <textarea class="form-control txt_response col-md-2" id="cate-cafe-text11" rows="1" readonly>영수증</textarea>
+            <textarea class="form-control txt_response col-md-2" id="cate-cafe-text12" rows="1" readonly>환불</textarea>
+
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-cate7"><img  src="static/img/cate/cate-cafe/테이크아웃.jpg" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-cate8"><img  src="static/img/cate/cate-cafe/현금.jpg" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-cate9"><img  src="static/img/cate/cate-cafe/카드.jpg" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-cate10"><img  src="static/img/cate/cate-cafe/얼음.jpg" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-cate11"><img  src="static/img/cate/cate-cafe/영수증.jpg" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-cate12"><img  src="static/img/cate/cate-cafe/환불.jpg" style="max-width: 100%; height: auto;"></button>
+        </div>
+    </div>
+    <div class="dialog-num">
+        <div class="form-row">
+            <textarea class="form-control txt_input col-md-12" id="input_num" rows="1" readonly></textarea>
+            <button class="col-md-12 close-button" type="button" style="background-color:white;" id="btn-close-num">CLOSE</button>
+            <textarea class="form-control col-md-2" id="num1" rows="1" >1</textarea>
+            <textarea class="form-control col-md-2" id="num2" rows="1" >2</textarea>
+            <textarea class="form-control col-md-2" id="num3" rows="1" >3</textarea>
+            <textarea class="form-control col-md-2" id="num4" rows="1" >4</textarea>
+            <textarea class="form-control col-md-2" id="num5" rows="1" >5</textarea>
+            <textarea class="form-control col-md-2" id="num6" rows="1" >6</textarea>
+
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-num1"><img  src="https://kr.seaicons.com/wp-content/uploads/2015/11/Numbers-1-icon.png" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-num2"><img  src="https://kr.seaicons.com/wp-content/uploads/2015/11/Numbers-2-icon.png" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-num3"><img  src="https://kr.seaicons.com/wp-content/uploads/2015/11/Numbers-3-icon.png" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-num4"><img  src="https://kr.seaicons.com/wp-content/uploads/2015/11/Numbers-4-icon.png" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-num5"><img  src="https://kr.seaicons.com/wp-content/uploads/2015/11/Numbers-5-icon.png" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-num6"><img  src="https://kr.seaicons.com/wp-content/uploads/2015/11/Numbers-6-icon.png" style="max-width: 100%; height: auto;"></button>
+
+            <textarea class="form-control txt_response col-md-2" id="num7" rows="1" readonly>7</textarea>
+            <textarea class="form-control txt_response col-md-2" id="num8" rows="1" readonly>8</textarea>
+            <textarea class="form-control txt_response col-md-2" id="num9" rows="1" readonly>9</textarea>
+            <textarea class="form-control txt_response col-md-2" id="num0" rows="1" readonly>0</textarea>
+            <textarea class="form-control txt_response col-md-2" id="numhan" rows="1" readonly>한</textarea>
+            <textarea class="form-control txt_response col-md-2" id="numdu" rows="1" readonly>두</textarea>
+
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-num7"><img  src="https://kr.seaicons.com/wp-content/uploads/2015/11/Numbers-7-icon.png" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-num8"><img  src="https://kr.seaicons.com/wp-content/uploads/2015/11/Numbers-8-icon.png" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-num9"><img  src="https://kr.seaicons.com/wp-content/uploads/2015/11/Numbers-9-icon.png" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-num0"><img  src="https://kr.seaicons.com/wp-content/uploads/2015/11/Numbers-0-icon.png" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-numhan"><img  src="https://kr.seaicons.com/wp-content/uploads/2015/11/Numbers-2-icon.png" style="max-width: 100%; height: auto;"></button>
+            <button class="col-md-2" type="button" style="background-color:white;" id="img-btn-numdu"><img  src="https://kr.seaicons.com/wp-content/uploads/2015/11/Numbers-2-icon.png" style="max-width: 100%; height: auto;"></button>
+        </div>
+    </div>
+
+
     <div class="overlay">
         <div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>
     </div>
@@ -84,26 +157,26 @@
 
 
             <div class="form-row">
-                <div class="form-group col-md-9">
+                <div class="form-group col-md-7">
                     <textarea class="form-control txt_input" id="input_text" rows="1" readonly></textarea>
                 </div>
                 <div class="form-group col-md-3">
                     <label></label>
-                    <button type="button" class="btn btn-primary btn-lg" onClick="window.location.reload()" id="init_text">문장 전체 초기화</button>
+                    <button type="button" class="btn btn-primary btn-lg" onClick="window.location.reload()" id="init_text">문장전체 초기화</button>
+                </div>
+                <div class="form-group col-md-2">
+                    <label></label>
                     <button type="button" class="btn btn-primary btn-lg" id="btn-process-prediction">predict</button>
                 </div>
-                <div class="form-group col-md-1">
+                <div class="form-group col-md-4">
                     <label></label>
-                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-init">init</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-init">문장만들기</button>
                 </div>
                 <div class="form-group col-md-3">
                     <label></label>
                     <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-cate">카테고리</button>
                 </div>
-                <div class="form-group col-md-3">
-                    <label></label>
-                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-half">반/존대</button>
-                </div>
+
                 <div class="form-group col-md-2">
                     <label></label>
                     <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-process-num">숫자</button>
@@ -145,14 +218,14 @@
                 <textarea class="form-control txt_response col-md-2" id="predict9" rows="1" readonly></textarea>
                 <textarea class="form-control txt_response col-md-2" id="predict10" rows="1" readonly></textarea>
                 <textarea class="form-control txt_response col-md-2" id="predict11" rows="1" readonly></textarea>
-                <textarea class="form-control txt_response col-md-2" rows="1" readonly>더보기</textarea>
+                <textarea class="form-control txt_response col-md-2" rows="1" readonly>더 보기</textarea>
 
                 <button class="col-md-2" type="button" style="background-color:white;" id="img-btn7"><img  src="https://static.arasaac.org/pictograms/2340/2340_2500.png" style="max-width: 100%; height: auto;"></button>
                 <button class="col-md-2" type="button" style="background-color:white;" id="img-btn8"><img  src="https://static.arasaac.org/pictograms/2296/2296_hair-020100_skin-F4ECAD_500.png" style="max-width: 100%; height: auto;"></button>
                 <button class="col-md-2" type="button" style="background-color:white;" id="img-btn9"><img  src="https://static.arasaac.org/pictograms/2296/2296_hair-020100_skin-F4ECAD_500.png" style="max-width: 100%; height: auto;"></button>
                 <button class="col-md-2" type="button" style="background-color:white;" id="img-btn10"><img  src="https://static.arasaac.org/pictograms/2296/2296_hair-020100_skin-F4ECAD_500.png" style="max-width: 100%; height: auto;"></button>
                 <button class="col-md-2" type="button" style="background-color:white;" id="img-btn11"><img  src="https://static.arasaac.org/pictograms/2296/2296_hair-020100_skin-F4ECAD_500.png" style="max-width: 100%; height: auto;"></button>
-                <button class="col-md-2" type="button" style="background-color:white;" id="img-more"><img  src="https://static.arasaac.org/pictograms/2296/2296_hair-020100_skin-F4ECAD_500.png" style="max-width: 100%; height: auto;"></button>
+                <button class="col-md-2" type="button" style="background-color:white;" id="img-more"><img  src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi6fN_fQV-XoLBHBTz-6zZkClnZUUYmaul3w&usqp=CAU" style="max-width: 100%; height: auto;"></button>
 
             </div>
         </div>
