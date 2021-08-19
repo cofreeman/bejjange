@@ -3,6 +3,15 @@ import torch
 import string
 import requests
 from transformers import BertTokenizer, BertForMaskedLM
+# --------------------------------------------
+# 한국어 단일 단어 -> arasaac 픽토그램 검색을 위한 번역 과정에서 필요한 라이브러리
+from nltk.tokenize import word_tokenize
+from nltk.tag import pos_tag
+# --------------------------------------------
+import nltk
+
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 
 bert_tokenizer = BertTokenizer.from_pretrained('kykim/bert-kor-base')
 bert_model = BertForMaskedLM.from_pretrained('kykim/bert-kor-base').eval()
@@ -28,7 +37,7 @@ def encode(tokenizer, text_sentence, add_special_tokens=True, mask_token='[MASK]
     return input_ids, mask_idx
 
 
-def get_all_predictions(text_sentence, top_k=50, top_clean=50):
+def get_all_predictions(text_sentence, top_k=30, top_clean=30):
     # ========================= BERT =================================
     print(text_sentence)
     input_ids, mask_idx = encode(bert_tokenizer, text_sentence)
@@ -40,7 +49,6 @@ def get_all_predictions(text_sentence, top_k=50, top_clean=50):
     return {'bert': bert}
 
 
-#-------------------------------------------------------------------------------------------------------#
 # 단일 단어에 대한 번역문
 def get_translate(bert_result):
     '''
@@ -49,9 +57,13 @@ def get_translate(bert_result):
     '''
     trans_result = []
 
+    #--------------------------------------------#
     # 구동할 서버에서 api 아이디 받아야 함
-    client_id = '클라이언트 아이디'
-    client_secret = '비밀번호'
+    # 개인 클라이언트 아이디 반드시 입력할 것!
+    client_id = ''
+    client_secret = ''
+    # --------------------------------------------#
+
 
     url = "https://openapi.naver.com/v1/papago/n2mt"
 
@@ -76,22 +88,46 @@ def get_translate(bert_result):
         else:
             print("Error Code:", rescode)
 
+    # ------------------------------------------------#
+    # verb_lemmatizer 함수 추가
+    trans_result = verb_lemmatizer(trans_result)
+    # ------------------------------------------------#
+
     return trans_result
 
-#-------------------------------------------------------------------------------------------------------#
-# 단일 단어에 대한 이미지 url json 함수 추가
 
+# 파파고 api 번역 결과를 집어넣어 문장에서 동사만 뽑아내는 함수
+def verb_lemmatizer(word_list):
+    '''
+    :param word_list: 파파고 api 번역 결과 리스트
+    :return: 문장으로 번역된 경우 동사만 뽑아낸 리스트
+    '''
+    for idx in range(len(word_list)):
+        # 문장으로 번역된 경우 (주어 + 동사 + 목적어)
+        if len(word_list[idx].split()) >= 2:
+            verb = [t[0] for t in pos_tag(word_tokenize(word_list[idx])) if 'V' in t[1]]
+
+            if len(verb) == 0:
+                continue
+
+            else:
+                word_list[idx] = verb[0]
+
+    return word_list
+
+
+# 단일 단어에 대한 이미지 url json 함수 추가
 def image_crawler(trans_result):
     '''
-    input : 번역 결과 단어 리스트
-    output : 각 번역 단어에 대한 이미지 url을 담은 json 형식
-    예시) {word : [word1, word2, word3...],
-            img_url : ['https://static.arasaac.org/pictograms/2617/2617_hair-020100_skin-F4ECAD_500.png', ....]}
+    :param trans_result: 파파고 api를 거친 리스트
+    :return: 1. image url이 담긴 딕셔너리
+             2. 결과가 있는 단어의 인덱스 리스트
     '''
+
     word_list = []
     image_url = []
 
-    for word in trans_result:
+    for idx, word in enumerate(trans_result):
         res = requests.get(f'https://api.arasaac.org/api/pictograms/en/bestsearch/{word}')
         req_json = res.json()
 
@@ -103,16 +139,33 @@ def image_crawler(trans_result):
                 f'https://api.arasaac.org/api/pictograms/{pic_id}?plural=false&color=true&resolution=500&skin=assian&hair=black&url=true&download=false')
             img_json = img_res.json()['image']
             image_url.append(img_json)
-            word_list.append(word)
+
+            # 결과가 있는 단어
+            word_list.append(idx)
 
         except:
-            print('해당되는 픽토그램 없음!')
+            print('해당되는 픽토그램 없음!', idx)
 
-    word_list = word_list[:11]
     image_url = image_url[:11]
 
-    return {'word': word_list, 'img_url': image_url}
-#-------------------------------------------------------------------------------------------------------#
+    return {'img_url': image_url}, word_list
+
+
+# ----------------------------------------------------------------#
+def find_result_word(bert_result, idx_list):
+    '''
+    :param bert_result: bert가 반환한 예측 단어
+    :param idx_list: 픽트그램 결과가 있는 단어의 인덱스
+    :return: 실제 픽토그램 결과가 존재하는 예측 단어의 리스트를 띄어쓰기 단위로 합친 결과
+    '''
+    valid_result = []
+    for idx in idx_list:
+        valid_word = bert_result.split()[idx]
+        valid_result.append(valid_word)
+
+    # bert 결과로 다시 반환 -> 서버에 전달하여 프론트단에 단어 출력
+    return ' '.join(valid_result)
+# ----------------------------------------------------------------#
 
 
 def init_word():
