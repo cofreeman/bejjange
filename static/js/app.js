@@ -147,10 +147,12 @@ jQuery(document).ready(function () {
         var word = $('#input_text').val();
         if (word.slice(-1) == ' '){
             word = word.split(' ').slice(0,-2).join(' ');
+        }else if(word.slice(0) == ''){
+            alert('문장을 입력해주세요!')
+            return
         }else {
             word = word.split(' ').slice(0,-1).join(' ');
         }
-        console.log($('#input_text'))
         console.log(word)
         $('#input_text').val(word);
         $.ajax({
@@ -1377,7 +1379,7 @@ jQuery(document).ready(function () {
     });
     $('#img-more').click(function(){
         var word = $('#input_text').val();
-        if (word.slice(0) == ''){
+        if (word.slice(0) == '' ){
             $.ajax({
                 url: '/get_end_predictions_init.html',
                 type: "post",
