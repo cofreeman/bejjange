@@ -26,6 +26,18 @@ jQuery(document).ready(function () {
             $('#predict10').val(jsondata['bert'].split(' ')[9])
             $('#predict11').val(jsondata['bert'].split(' ')[10])
             $('#predict12').val(jsondata['bert'].split(' ')[11])
+
+            $('#image1').attr('src', jsondata['img_url'][0])
+            $('#image2').attr('src', jsondata['img_url'][1])
+            $('#image3').attr('src', jsondata['img_url'][2])
+            $('#image4').attr('src', jsondata['img_url'][3])
+            $('#image5').attr('src', jsondata['img_url'][4])
+            $('#image6').attr('src', jsondata['img_url'][5])
+            $('#image7').attr('src', jsondata['img_url'][6])
+            $('#image8').attr('src', jsondata['img_url'][7])
+            $('#image9').attr('src', jsondata['img_url'][8])
+            $('#image10').attr('src', jsondata['img_url'][9])
+            $('#image11').attr('src', jsondata['img_url'][10])
         }).fail(function (jsondata, textStatus, jqXHR) {
             console.log(jsondata)
         });
@@ -54,6 +66,18 @@ jQuery(document).ready(function () {
             $('#predict10').val(jsondata['bert'].split(' ')[9])
             $('#predict11').val(jsondata['bert'].split(' ')[10])
             $('#predict12').val(jsondata['bert'].split(' ')[11])
+
+            $('#image1').attr('src', jsondata['img_url'][0])
+            $('#image2').attr('src', jsondata['img_url'][1])
+            $('#image3').attr('src', jsondata['img_url'][2])
+            $('#image4').attr('src', jsondata['img_url'][3])
+            $('#image5').attr('src', jsondata['img_url'][4])
+            $('#image6').attr('src', jsondata['img_url'][5])
+            $('#image7').attr('src', jsondata['img_url'][6])
+            $('#image8').attr('src', jsondata['img_url'][7])
+            $('#image9').attr('src', jsondata['img_url'][8])
+            $('#image10').attr('src', jsondata['img_url'][9])
+            $('#image11').attr('src', jsondata['img_url'][10])
         }).fail(function (jsondata, textStatus, jqXHR) {
             alert("")
             console.log(jsondata)
@@ -83,6 +107,18 @@ jQuery(document).ready(function () {
             $('#predict10').val(jsondata['bert'].split(' ')[9])
             $('#predict11').val(jsondata['bert'].split(' ')[10])
             $('#predict12').val(jsondata['bert'].split(' ')[11])
+
+            $('#image1').attr('src', jsondata['img_url'][0])
+            $('#image2').attr('src', jsondata['img_url'][1])
+            $('#image3').attr('src', jsondata['img_url'][2])
+            $('#image4').attr('src', jsondata['img_url'][3])
+            $('#image5').attr('src', jsondata['img_url'][4])
+            $('#image6').attr('src', jsondata['img_url'][5])
+            $('#image7').attr('src', jsondata['img_url'][6])
+            $('#image8').attr('src', jsondata['img_url'][7])
+            $('#image9').attr('src', jsondata['img_url'][8])
+            $('#image10').attr('src', jsondata['img_url'][9])
+            $('#image11').attr('src', jsondata['img_url'][10])
         }).fail(function (jsondata, textStatus, jqXHR) {
             console.log(jsondata)
         });
@@ -111,6 +147,18 @@ jQuery(document).ready(function () {
             $('#predict10').val(jsondata['bert'].split(' ')[9])
             $('#predict11').val(jsondata['bert'].split(' ')[10])
             $('#predict12').val(jsondata['bert'].split(' ')[11])
+
+            $('#image1').attr('src', jsondata['img_url'][0])
+            $('#image2').attr('src', jsondata['img_url'][1])
+            $('#image3').attr('src', jsondata['img_url'][2])
+            $('#image4').attr('src', jsondata['img_url'][3])
+            $('#image5').attr('src', jsondata['img_url'][4])
+            $('#image6').attr('src', jsondata['img_url'][5])
+            $('#image7').attr('src', jsondata['img_url'][6])
+            $('#image8').attr('src', jsondata['img_url'][7])
+            $('#image9').attr('src', jsondata['img_url'][8])
+            $('#image10').attr('src', jsondata['img_url'][9])
+            $('#image11').attr('src', jsondata['img_url'][10])
         }).fail(function (jsondata, textStatus, jqXHR) {
             console.log(jsondata)
         });
