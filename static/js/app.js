@@ -1375,38 +1375,6 @@ jQuery(document).ready(function () {
         $('.dialog').hide();
         $('body').removeClass('active');
     });
-    $('#delete').click(function(){
-        var word = $('#input_text').val();
-        console.log($('#input_text'))
-        console.log(word)
-        $('#input_text').val(word);
-        $.ajax({
-            url: '/get_end_predictions.html',
-            type: "post",
-            contentType: "application/json",
-            dataType: "json",
-            data: JSON.stringify({
-                "input_text": $('#input_text').val(),
-                "top_k": '50',
-            })
-        }).done(function (jsondata, textStatus, jqXHR) {
-            console.log(jsondata)
-            $('#predict1').val(jsondata['bert'].split(' ')[0])
-            $('#predict2').val(jsondata['bert'].split(' ')[1])
-            $('#predict3').val(jsondata['bert'].split(' ')[2])
-            $('#predict4').val(jsondata['bert'].split(' ')[3])
-            $('#predict5').val(jsondata['bert'].split(' ')[4])
-            $('#predict6').val(jsondata['bert'].split(' ')[5])
-            $('#predict7').val(jsondata['bert'].split(' ')[6])
-            $('#predict8').val(jsondata['bert'].split(' ')[7])
-            $('#predict9').val(jsondata['bert'].split(' ')[8])
-            $('#predict10').val(jsondata['bert'].split(' ')[9])
-            $('#predict11').val(jsondata['bert'].split(' ')[10])
-            $('#predict12').val(jsondata['bert'].split(' ')[11])
-        }).fail(function (jsondata, textStatus, jqXHR) {
-            console.log(jsondata)
-        });
-    });
     $('#img-more').click(function(){
         var word = $('#input_text').val();
         if (word.slice(0) == ''){
