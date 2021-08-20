@@ -97,7 +97,7 @@ def get_prediction_eos_nuggimpyo():
 
         # 결과가 있는 단어만 json 형식으로 전달할 res에 업데이트
         res['bert'] = main.find_result_word(res['bert'], result_idx)
-
+        res['im1'] = 'im1'
         res.update(img_res)
         return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
     except Exception as error:
