@@ -1,6 +1,7 @@
 var data = []
 var token = ""
-jQuery(document).ready(function () {
+
+jQuery(window).ready(function () {
 
     $('#btn-process-prediction').on('click', function () {
         $.ajax({
@@ -174,7 +175,6 @@ jQuery(document).ready(function () {
                 "top_k": '50',
             })
         }).done(function (jsondata, textStatus, jqXHR) {
-            console.log(jsondata)
             $('#predict1').val(jsondata['bert'].split(' ')[0])
             $('#predict2').val(jsondata['bert'].split(' ')[1])
             $('#predict3').val(jsondata['bert'].split(' ')[2])
@@ -255,21 +255,34 @@ jQuery(document).ready(function () {
         });
     });
     $('#img-btn1').click(function(){
+        var pic_num = 0
+            pic_num++
         var predict1 = $('#predict1').val();
-        $(this).clone().appendTo('.clone-img');
+        var im1 = $('#image1').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto',
+            'onclick' : 'click-hide(this)'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
             type: "post",
             contentType: "application/json",
+            async: false,
             dataType: "json",
             data: JSON.stringify({
                 "input_text": $('#input_text').val(),
                 "top_k": '50',
+                "im1": $('#img-btn1')
             })
-        }).done(function (jsondata, textStatus, jqXHR) {
-            console.log(jsondata)
-            $('#predict1').val(jsondata['bert'].split(' ')[0])
+        }).done(function (jsondata, textStatus, jqXHR,) {
+            $('#predict1').val(jsondata['bert'].split(' ')[1])
             $('#predict2').val(jsondata['bert'].split(' ')[1])
             $('#predict3').val(jsondata['bert'].split(' ')[2])
             $('#predict4').val(jsondata['bert'].split(' ')[3])
@@ -293,13 +306,21 @@ jQuery(document).ready(function () {
             $('#image9').attr('src', jsondata['img_url'][8])
             $('#image10').attr('src', jsondata['img_url'][9])
             $('#image11').attr('src', jsondata['img_url'][10])
-        }).fail(function (jsondata, textStatus, jqXHR) {
-            console.log(jsondata)
         });
     });
     $('#img-btn2').click(function(){
+        pic_num++
         var predict1 = $('#predict2').val();
-        $(this).clone().appendTo('.clone-img');
+        var im1 = $('#image2').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -342,7 +363,16 @@ jQuery(document).ready(function () {
     });
     $('#img-btn3').click(function(){
         var predict1 = $('#predict3').val();
-        $(this).clone().appendTo('.clone-img');
+        var im1 = $('#image3').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -385,7 +415,16 @@ jQuery(document).ready(function () {
     });
     $('#img-btn4').click(function(){
         var predict1 = $('#predict4').val();
-        $(this).clone().appendTo('.clone-img');
+        var im1 = $('#image4').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -428,7 +467,16 @@ jQuery(document).ready(function () {
     });
     $('#img-btn5').click(function(){
         var predict1 = $('#predict5').val();
-        $(this).clone().appendTo('.clone-img');
+        var im1 = $('#image5').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -471,7 +519,16 @@ jQuery(document).ready(function () {
     });
     $('#img-btn6').click(function(){
         var predict1 = $('#predict6').val();
-        $(this).clone().appendTo('.clone-img');
+        var im1 = $('#image6').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -514,7 +571,16 @@ jQuery(document).ready(function () {
     });
     $('#img-btn7').click(function(){
         var predict1 = $('#predict7').val();
-        $(this).clone().appendTo('.clone-img');
+        var im1 = $('#image7').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -557,7 +623,16 @@ jQuery(document).ready(function () {
     });
     $('#img-btn8').click(function(){
         var predict1 = $('#predict8').val();
-        $(this).clone().appendTo('.clone-img');
+        var im1 = $('#image8').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -600,7 +675,16 @@ jQuery(document).ready(function () {
     });
     $('#img-btn9').click(function(){
         var predict1 = $('#predict9').val();
-        $(this).clone().appendTo('.clone-img');
+        var im1 = $('#image9').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -643,7 +727,16 @@ jQuery(document).ready(function () {
     });
     $('#img-btn10').click(function(){
         var predict1 = $('#predict10').val();
-        $(this).clone().appendTo('.clone-img');
+        var im1 = $('#image10').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -686,7 +779,16 @@ jQuery(document).ready(function () {
     });
     $('#img-btn11').click(function(){
         var predict1 = $('#predict11').val();
-        $(this).clone().appendTo('.clone-img');
+        var im1 = $('#image11').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -728,8 +830,17 @@ jQuery(document).ready(function () {
         });
     });
     $('#img-btn12').click(function(){
-        var predict1 = $('#predict13').val();
-        $(this).clone().appendTo('.clone-img');
+        var predict1 = $('#predict12').val();
+        var im1 = $('#image12').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -771,8 +882,17 @@ jQuery(document).ready(function () {
         });
     });
     $('#img-btn13').click(function(){
-        var predict1 = $('#predict14').val();
-        $(this).clone().appendTo('.clone-img');
+        var predict1 = $('#predict1').val();
+        var im1 = $('#image1').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -814,8 +934,17 @@ jQuery(document).ready(function () {
         });
     });
     $('#img-btn14').click(function(){
-        var predict1 = $('#predict15').val();
-        $(this).clone().appendTo('.clone-img');
+        var predict1 = $('#predict1').val();
+        var im1 = $('#image1').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -857,8 +986,17 @@ jQuery(document).ready(function () {
         });
     });
     $('#img-btn15').click(function(){
-        var predict1 = $('#predict16').val();
-        $(this).clone().appendTo('.clone-img');
+        var predict1 = $('#predict1').val();
+        var im1 = $('#image1').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -900,8 +1038,17 @@ jQuery(document).ready(function () {
         });
     });
     $('#img-btn16').click(function(){
-        var predict1 = $('#predict17').val();
-        $(this).clone().appendTo('.clone-img');
+        var predict1 = $('#predict1').val();
+        var im1 = $('#image1').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -943,8 +1090,17 @@ jQuery(document).ready(function () {
         });
     });
     $('#img-btn17').click(function(){
-        var predict1 = $('#predict18').val();
-        $(this).clone().appendTo('.clone-img');
+        var predict1 = $('#predict1').val();
+        var im1 = $('#image1').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -986,8 +1142,17 @@ jQuery(document).ready(function () {
         });
     });
     $('#img-btn18').click(function(){
-        var predict1 = $('#predict19').val();
-        $(this).clone().appendTo('.clone-img');
+        var predict1 = $('#predict1').val();
+        var im1 = $('#image1').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -1029,8 +1194,17 @@ jQuery(document).ready(function () {
         });
     });
     $('#img-btn19').click(function(){
-        var predict1 = $('#predict20').val();
-        $(this).clone().appendTo('.clone-img');
+        var predict1 = $('#predict1').val();
+        var im1 = $('#image1').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -1072,8 +1246,17 @@ jQuery(document).ready(function () {
         });
     });
     $('#img-btn20').click(function(){
-        var predict1 = $('#predict21').val();
-        $(this).clone().appendTo('.clone-img');
+        var predict1 = $('#predict1').val();
+        var im1 = $('#image1').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -1115,8 +1298,17 @@ jQuery(document).ready(function () {
         });
     });
     $('#img-btn21').click(function(){
-        var predict1 = $('#predict22').val();
-        $(this).clone().appendTo('.clone-img');
+        var predict1 = $('#predict1').val();
+        var im1 = $('#image1').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -1158,8 +1350,17 @@ jQuery(document).ready(function () {
         });
     });
     $('#img-btn22').click(function(){
-        var predict1 = $('#predict23').val();
-        $(this).clone().appendTo('.clone-img');
+        var predict1 = $('#predict1').val();
+        var im1 = $('#image1').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -1201,8 +1402,17 @@ jQuery(document).ready(function () {
         });
     });
     $('#img-btn23').click(function(){
-        var predict1 = $('#predict24').val();
-        $(this).clone().appendTo('.clone-img');
+        var predict1 = $('#predict1').val();
+        var im1 = $('#image1').attr('src');
+        var img = $('<img />').attr({
+            'class': 'col-md-2',
+            'id': '',
+            'src': '',
+            'max-width' : '100%',
+            'height' : 'auto'
+        });
+        (img).attr('src', im1);
+        (img).appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
@@ -1823,38 +2033,46 @@ jQuery(document).ready(function () {
         $('.dialog-cafe').hide();
         $('body').removeClass('active');
     });
+
     $('#btn-close-num').click(function(){
         $('.dialog-num').hide();
         $('body').removeClass('active');
-        var num = $('#input_num').val();
-//        $(this).clone().appendTo('.clone-img');
-        $('#input_text').append(num+ ' ');
-        $.ajax({
-            url: '/get_end_predictions.html',
-            type: "post",
-            contentType: "application/json",
-            dataType: "json",
-            data: JSON.stringify({
-                "input_text": $('#input_text').val(),
-                "top_k": '50',
-            })
-        }).done(function (jsondata, textStatus, jqXHR) {
-            console.log(jsondata)
-            $('#predict1').val(jsondata['bert'].split(' ')[0])
-            $('#predict2').val(jsondata['bert'].split(' ')[1])
-            $('#predict3').val(jsondata['bert'].split(' ')[2])
-            $('#predict4').val(jsondata['bert'].split(' ')[3])
-            $('#predict5').val(jsondata['bert'].split(' ')[4])
-            $('#predict6').val(jsondata['bert'].split(' ')[5])
-            $('#predict7').val(jsondata['bert'].split(' ')[6])
-            $('#predict8').val(jsondata['bert'].split(' ')[7])
-            $('#predict9').val(jsondata['bert'].split(' ')[8])
-            $('#predict10').val(jsondata['bert'].split(' ')[9])
-            $('#predict11').val(jsondata['bert'].split(' ')[10])
-            $('#predict12').val(jsondata['bert'].split(' ')[11])
-        }).fail(function (jsondata, textStatus, jqXHR) {
-            console.log(jsondata)
-        });
+        var word = $('#input_num').val();
+        if (word.slice(0) == ''){
+            return
+        }else{
+            var num = $('#input_num').val();
+            $('#input_text').append(num+ ' ');
+            $('#no-pic').clone().removeClass('invisible').appendTo('.clone-img');
+    //        $('#whatinwhite').val(num);
+            $('#input_num').empty();
+            $.ajax({
+                url: '/get_end_predictions.html',
+                type: "post",
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify({
+                    "input_text": $('#input_text').val(),
+                    "top_k": '50',
+                })
+            }).done(function (jsondata, textStatus, jqXHR) {
+                console.log(jsondata)
+                $('#predict1').val(jsondata['bert'].split(' ')[0])
+                $('#predict2').val(jsondata['bert'].split(' ')[1])
+                $('#predict3').val(jsondata['bert'].split(' ')[2])
+                $('#predict4').val(jsondata['bert'].split(' ')[3])
+                $('#predict5').val(jsondata['bert'].split(' ')[4])
+                $('#predict6').val(jsondata['bert'].split(' ')[5])
+                $('#predict7').val(jsondata['bert'].split(' ')[6])
+                $('#predict8').val(jsondata['bert'].split(' ')[7])
+                $('#predict9').val(jsondata['bert'].split(' ')[8])
+                $('#predict10').val(jsondata['bert'].split(' ')[9])
+                $('#predict11').val(jsondata['bert'].split(' ')[10])
+                $('#predict12').val(jsondata['bert'].split(' ')[11])
+            }).fail(function (jsondata, textStatus, jqXHR) {
+                console.log(jsondata)
+            });
+        }
     });
 
     $('#btn-close-cate').click(function(){
