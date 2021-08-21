@@ -36,6 +36,10 @@ html,body{width:100%;height:100%;}
     display: none;
     z-index: 3;
 }
+.solid {
+  outline-style: solid; /* same result as "outline: auto" */
+}
+
 
 html,body{width:100%;height:100%;}
 .dialog-cafe{
@@ -61,9 +65,19 @@ html,body{width:100%;height:100%;}
     display: none;
     z-index: 3;
 }
-.invisible{
-    display : none;
+html,body{width:100%;height:100%;}
+.dialogbig{
+    border:2px solid black;
+    background:white;
+    color:#fff;
+    position: absolute;
+    width:100%;
+    left:50%; top:10%;
+    transform:translate(-50%,50%);
+    display: none;
+    z-index: 3;
 }
+
 .centered {
   position: absolute;
   top: 50%;
@@ -80,6 +94,18 @@ body:after{
     z-index: 2;
 }
 body.active:after{
+    display:block;
+}
+
+body.active2:after{
+    content:'';
+    position:absolute;
+    background:rgba(0,0,0,1);
+    left:0%;right:0;top:0%;bottom:0;
+    display:none;
+    z-index: 2;
+}
+body.active2:after{
     display:block;
 }
 
