@@ -9,12 +9,21 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('main.html')
 
 
 @app.route('/mainpage')
 def mainpage():
-    return render_template('main.html')
+    return render_template('index.html')
+
+@app.route('/eboard')
+def eboard():
+    return render_template('eboard.html')
+
+@app.route('/howtouse')
+def howtouse():
+    return render_template('howtouse.html')
+
 
 
 @app.route('/get_end_predictions.html', methods=['post'])
