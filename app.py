@@ -9,12 +9,21 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('main.html')
 
 
 @app.route('/mainpage')
 def mainpage():
-    return render_template('main.html')
+    return render_template('index.html')
+
+@app.route('/eboard')
+def eboard():
+    return render_template('eboard.html')
+
+@app.route('/howtouse')
+def howtouse():
+    return render_template('howtouse.html')
+
 
 
 @app.route('/get_end_predictions.html', methods=['post'])
@@ -24,6 +33,15 @@ def get_prediction_eos():
         input_text += ' <mask> #'
         top_k = request.json['top_k']
         res = main.get_all_predictions(input_text, top_clean=int(top_k))
+
+        trans_result = main.get_translate(res['bert'])  # list
+        img_res, result_idx = main.image_crawler(trans_result)
+
+        # 결과가 있는 단어만 json 형식으로 전달할 res에 업데이트
+        res['bert'] = main.find_result_word(res['bert'], result_idx)
+
+        res.update(img_res)
+
         return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
     except Exception as error:
         err = str(error)
@@ -38,6 +56,14 @@ def get_prediction_eos_jum():
         input_text += ' <mask>.'
         top_k = request.json['top_k']
         res = main.get_all_predictions(input_text, top_clean=int(top_k))
+
+        trans_result = main.get_translate(res['bert'])  # list
+        img_res, result_idx = main.image_crawler(trans_result)
+
+        # 결과가 있는 단어만 json 형식으로 전달할 res에 업데이트
+        res['bert'] = main.find_result_word(res['bert'], result_idx)
+
+        res.update(img_res)
         return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
     except Exception as error:
         err = str(error)
@@ -52,6 +78,14 @@ def get_prediction_eos_question():
         input_text += ' <mask>?'
         top_k = request.json['top_k']
         res = main.get_all_predictions(input_text, top_clean=int(top_k))
+
+        trans_result = main.get_translate(res['bert'])  # list
+        img_res, result_idx = main.image_crawler(trans_result)
+
+        # 결과가 있는 단어만 json 형식으로 전달할 res에 업데이트
+        res['bert'] = main.find_result_word(res['bert'], result_idx)
+
+        res.update(img_res)
         return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
     except Exception as error:
         err = str(error)
@@ -66,6 +100,14 @@ def get_prediction_eos_nuggimpyo():
         input_text += ' <mask>!'
         top_k = request.json['top_k']
         res = main.get_all_predictions(input_text, top_clean=int(top_k))
+
+        trans_result = main.get_translate(res['bert'])  # list
+        img_res, result_idx = main.image_crawler(trans_result)
+
+        # 결과가 있는 단어만 json 형식으로 전달할 res에 업데이트
+        res['bert'] = main.find_result_word(res['bert'], result_idx)
+        res['im1'] = 'im1'
+        res.update(img_res)
         return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
     except Exception as error:
         err = str(error)
