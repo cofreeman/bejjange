@@ -14,9 +14,18 @@
     <script src="../static/js/app.js"></script>
 
 </head>
+<!--<script type="text/javascript">-->
+<!--function click-hide(img){-->
+<!--    (img).attr-->
 
+<!--}-->
+<!--</script>-->
 
 <body>
+    <button id = 'no-pic' class="invisible col-md-2" style="background-color:white;" value="">
+      <img style="background-color:white;max-width: 100%; height: auto;" src="static/img/dogu/pure-white.PNG">
+      <div class="centered">Centered</div>
+    </button>
     <div class="dialog">
         <div class="form-row">
             <button class="col-md-12 close-button" type="button" style="background-color:white;" id="btn-close-more">CLOSE</button>
@@ -102,7 +111,7 @@
     </div>
     <div class="dialog-num">
         <div class="form-row">
-            <textarea class="form-control txt_input col-md-12" id="input_num" rows="1" readonly></textarea>
+            <textarea class="form-control txt_input txt_response col-md-12" id="input_num" rows="1" readonly></textarea>
             <button class="col-md-12 close-button" type="button" style="background-color:white;" id="btn-close-num">CLOSE</button>
             <textarea class="form-control col-md-2" id="num1" rows="1" >1</textarea>
             <textarea class="form-control col-md-2" id="num2" rows="1" >2</textarea>
