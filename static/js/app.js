@@ -218,7 +218,8 @@ jQuery(window).ready(function () {
         console.log(word)
         $('#input_text').empty();
         $('#input_text').append(word+' ');
-        $('.clone-img').children().last().remove();
+        $('#cloneimg1').children().last().remove();
+        $('#cloneimg2').children().last().remove();
         $.ajax({
             url: '/get_end_predictions.html',
             type: "post",
