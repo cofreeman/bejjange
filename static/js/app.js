@@ -214,7 +214,8 @@ jQuery(window).ready(function () {
             word = word.split(' ').slice(0,-1).join(' ');
         }
         console.log(word)
-        $('#input_text').val(word);
+        $('#input_text').empty();
+        $('#input_text').append(word+' ');
         $.ajax({
             url: '/get_end_predictions.html',
             type: "post",
@@ -255,8 +256,6 @@ jQuery(window).ready(function () {
         });
     });
     $('#img-btn1').click(function(){
-        var pic_num = 0
-            pic_num++
         var predict1 = $('#predict1').val();
         var im1 = $('#image1').attr('src');
         var img = $('<img />').attr({
@@ -282,7 +281,7 @@ jQuery(window).ready(function () {
                 "im1": $('#img-btn1')
             })
         }).done(function (jsondata, textStatus, jqXHR,) {
-            $('#predict1').val(jsondata['bert'].split(' ')[1])
+            $('#predict1').val(jsondata['bert'].split(' ')[0])
             $('#predict2').val(jsondata['bert'].split(' ')[1])
             $('#predict3').val(jsondata['bert'].split(' ')[2])
             $('#predict4').val(jsondata['bert'].split(' ')[3])
@@ -309,7 +308,6 @@ jQuery(window).ready(function () {
         });
     });
     $('#img-btn2').click(function(){
-        pic_num++
         var predict1 = $('#predict2').val();
         var im1 = $('#image2').attr('src');
         var img = $('<img />').attr({
@@ -2043,8 +2041,8 @@ jQuery(window).ready(function () {
         }else{
             var num = $('#input_num').val();
             $('#input_text').append(num+ ' ');
+            $('#center-word').text(num)
             $('#no-pic').clone().removeClass('invisible').appendTo('.clone-img');
-    //        $('#whatinwhite').val(num);
             $('#input_num').empty();
             $.ajax({
                 url: '/get_end_predictions.html',
@@ -2069,6 +2067,18 @@ jQuery(window).ready(function () {
                 $('#predict10').val(jsondata['bert'].split(' ')[9])
                 $('#predict11').val(jsondata['bert'].split(' ')[10])
                 $('#predict12').val(jsondata['bert'].split(' ')[11])
+
+                $('#image1').attr('src', jsondata['img_url'][0])
+                $('#image2').attr('src', jsondata['img_url'][1])
+                $('#image3').attr('src', jsondata['img_url'][2])
+                $('#image4').attr('src', jsondata['img_url'][3])
+                $('#image5').attr('src', jsondata['img_url'][4])
+                $('#image6').attr('src', jsondata['img_url'][5])
+                $('#image7').attr('src', jsondata['img_url'][6])
+                $('#image8').attr('src', jsondata['img_url'][7])
+                $('#image9').attr('src', jsondata['img_url'][8])
+                $('#image10').attr('src', jsondata['img_url'][9])
+                $('#image11').attr('src', jsondata['img_url'][10])
             }).fail(function (jsondata, textStatus, jqXHR) {
                 console.log(jsondata)
             });
