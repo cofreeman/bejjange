@@ -1,5 +1,6 @@
 var data = []
 var token = ""
+//var imnum = 1;
 
 jQuery(window).ready(function () {
 
@@ -203,6 +204,7 @@ jQuery(window).ready(function () {
             console.log(jsondata)
         });
     })
+
     $('#delete').click(function(){
         var word = $('#input_text').val();
         if (word.slice(-1) == ' '){
@@ -216,6 +218,8 @@ jQuery(window).ready(function () {
         console.log(word)
         $('#input_text').empty();
         $('#input_text').append(word+' ');
+        $('#cloneimg1').children().last().remove();
+        $('#cloneimg2').children().last().remove();
         $.ajax({
             url: '/get_end_predictions.html',
             type: "post",
@@ -264,7 +268,6 @@ jQuery(window).ready(function () {
             'src': '',
             'max-width' : '100%',
             'height' : 'auto',
-            'onclick' : 'click-hide(this)'
         });
         (img).attr('src', im1);
         (img).appendTo('.clone-img');
@@ -273,12 +276,10 @@ jQuery(window).ready(function () {
             url: '/get_end_predictions.html',
             type: "post",
             contentType: "application/json",
-            async: false,
             dataType: "json",
             data: JSON.stringify({
                 "input_text": $('#input_text').val(),
                 "top_k": '50',
-                "im1": $('#img-btn1')
             })
         }).done(function (jsondata, textStatus, jqXHR,) {
             $('#predict1').val(jsondata['bert'].split(' ')[0])
@@ -2085,12 +2086,23 @@ jQuery(window).ready(function () {
         }
     });
 
+
+    $('#btn-process-big').click(function(){
+        $('.dialogbig').show();
+        $('body').addClass('active2');
+        $('#big-text').val($('#input_text').val())
+    });
+
+    $('#btn-process-big-close').click(function(){
+        $('.dialogbig').hide();
+        $('body').removeClass('active2');
+    });
+
+
     $('#btn-close-cate').click(function(){
         $('.dialog2').hide();
         $('body').removeClass('active');
     });
-
-
 
 
     $('#btn-close-more').click(function(){
