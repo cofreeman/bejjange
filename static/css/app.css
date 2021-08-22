@@ -152,7 +152,7 @@ h4 {
 
 #input_text{
   width: 1020px;
-  height: 50px;
+  height: 150px;
   border: 10px solid #6da78c;
   border-radius: 5px;
 }
@@ -162,7 +162,7 @@ article {display: flex; width: 100%; height: 170px;}
 #init_text{
   display: table;
   width: 150px;
-  height: 50px;
+  height: 150px;
   background:#f6b024;
   margin-top: 10px;
   margin-left: 20px;
@@ -181,15 +181,15 @@ article {display: flex; width: 100%; height: 170px;}
 /*--------------------------------------------------------------
 # Predict button(textarea)
 --------------------------------------------------------------*/
-#predict_text_image{
+/*#predict_text_image{
   display: table;
-  /*width: 150px;
-  height: 50px;*/
+  width: 150px;
+  height: 50px;
   background:#f6b024;
   margin-top: 10px;
   margin-left: 20px;
   border-radius: 5px;
-}
+}*/
 
 /*--------------------------------------------------------------
 # Header
