@@ -271,13 +271,11 @@ jQuery(window).ready(function () {
         });
         (img).attr('src', im1);
         (img).appendTo('.clone-img');
-        ('.clone-img').appendTo('.clone-img');
         $('#input_text').append(predict1+ ' ');
         $.ajax({
             url: '/get_end_predictions.html',
             type: "post",
             contentType: "application/json",
-            async: false,
             dataType: "json",
             data: JSON.stringify({
                 "input_text": $('#input_text').val(),
