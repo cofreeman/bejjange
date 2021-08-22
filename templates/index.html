@@ -4,6 +4,19 @@
 
 <head>
     <meta charset="utf-8">
+
+    <title>리:본</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="static/img/favicon.png" rel="icon">
+    <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
     <link href="../static/css/app.css" rel="stylesheet">
@@ -208,8 +221,7 @@
 
             <div class="form-row">
                 <article>
-                    <div id="input_text_image">
-                        <!--<div class="clone-img "></div>-->
+                    <div>
                         <textarea class="form-control txt_input" id="input_text" rows="1" readonly></textarea></div>
                     <div>
                     <button type="button" class="" id="delete">
@@ -277,7 +289,7 @@
                     <!--<button type="button" class="btn btn-secondary btn-lg btn-block" id="btn-process-half">반/존대</button>-->
                     <button type="button" class="btn btn-secondary btn-lg btn-block" id="btn-process-big">문장크게만들기</button>
                 </div>
-                <!---edit-->
+                <!---edit: 사이트 레이아웃 안정화 확인 후 삭제 예정-->
                 <!--
                 <div class="form-group col-md-2">
                     <label></label>
@@ -312,7 +324,7 @@
 
 
             <h4> 예상 단어  </h4>
-            <div class="form-row">
+            <div class="form-row" id="predict_text_image">
 
                 <textarea class="form-control txt_response col-md-2" id="predict1" rows="1" readonly></textarea>
                 <textarea class="form-control txt_response col-md-2" id="predict2" rows="1" readonly></textarea>

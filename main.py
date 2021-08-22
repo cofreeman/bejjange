@@ -60,9 +60,9 @@ def get_translate(bert_result):
     #--------------------------------------------#
     # 구동할 서버에서 api 아이디 받아야 함
     # 개인 클라이언트 아이디 반드시 입력할 것!
-    client_id = '8iPtMCKVi1NjWlOe4spI'
-    client_secret = 'YNjjO1Mh8a'
-    # --------------------------------------------#
+    client_id = ''
+    client_secret = ''
+    # ------------------------g--------------------#
 
 
     url = "https://openapi.naver.com/v1/papago/n2mt"
