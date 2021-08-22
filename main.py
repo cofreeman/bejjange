@@ -60,8 +60,8 @@ def get_translate(bert_result):
     #--------------------------------------------#
     # 구동할 서버에서 api 아이디 받아야 함
     # 개인 클라이언트 아이디 반드시 입력할 것!
-    client_id = ''
-    client_secret = ''
+    client_id = '8iPtMCKVi1NjWlOe4spI'
+    client_secret = 'YNjjO1Mh8a'
     # ------------------------g--------------------#
 
 
@@ -146,7 +146,7 @@ def image_crawler(trans_result):
         except:
             print('해당되는 픽토그램 없음!', idx)
 
-    image_url = image_url[:11]
+    image_url = image_url[:15]
 
     return {'img_url': image_url}, word_list
 
@@ -169,4 +169,5 @@ def find_result_word(bert_result, idx_list):
 
 
 def init_word():
-    return {'bert': '나는 저는 이제 우리 역시 그러면 너는 당신은 우리 제가 혹시 최정우 아 야 어 여 우 유 개 비 바 재 대'}
+    return {'bert': '나는 저는 저의 제가 우리 너는 당신은 너의 여러분 누구 이 그 저 이제 혹시 오전에 오후에 만약 지금 내일 모래 어제 잠시후에'}
+
