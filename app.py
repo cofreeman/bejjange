@@ -35,10 +35,7 @@ def get_prediction_eos():
         res = main.get_all_predictions(input_text, top_clean=int(top_k))
 
         trans_result = main.get_translate(res['bert'])  # list
-        img_res, result_idx = main.image_crawler(trans_result)
-
-        # 결과가 있는 단어만 json 형식으로 전달할 res에 업데이트
-        res['bert'] = main.find_result_word(res['bert'], result_idx)
+        img_res = main.image_crawler(res['bert'], trans_result)
 
         res.update(img_res)
 
@@ -58,10 +55,7 @@ def get_prediction_eos_jum():
         res = main.get_all_predictions(input_text, top_clean=int(top_k))
 
         trans_result = main.get_translate(res['bert'])  # list
-        img_res, result_idx = main.image_crawler(trans_result)
-
-        # 결과가 있는 단어만 json 형식으로 전달할 res에 업데이트
-        res['bert'] = main.find_result_word(res['bert'], result_idx)
+        img_res = main.image_crawler(res['bert'], trans_result)
 
         res.update(img_res)
         return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
@@ -80,10 +74,7 @@ def get_prediction_eos_question():
         res = main.get_all_predictions(input_text, top_clean=int(top_k))
 
         trans_result = main.get_translate(res['bert'])  # list
-        img_res, result_idx = main.image_crawler(trans_result)
-
-        # 결과가 있는 단어만 json 형식으로 전달할 res에 업데이트
-        res['bert'] = main.find_result_word(res['bert'], result_idx)
+        img_res = main.image_crawler(res['bert'], trans_result)
 
         res.update(img_res)
         return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
@@ -102,11 +93,8 @@ def get_prediction_eos_nuggimpyo():
         res = main.get_all_predictions(input_text, top_clean=int(top_k))
 
         trans_result = main.get_translate(res['bert'])  # list
-        img_res, result_idx = main.image_crawler(trans_result)
+        img_res = main.image_crawler(res['bert'], trans_result)
 
-        # 결과가 있는 단어만 json 형식으로 전달할 res에 업데이트
-        res['bert'] = main.find_result_word(res['bert'], result_idx)
-        res['im1'] = 'im1'
         res.update(img_res)
         return app.response_class(response=json.dumps(res), status=200, mimetype='application/json')
     except Exception as error:
