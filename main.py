@@ -3,12 +3,13 @@ import torch
 import string
 import requests
 from transformers import BertTokenizer, BertForMaskedLM
-# --------------------------------------------
-# 한국어 단일 단어 -> arasaac 픽토그램 검색을 위한 번역 과정에서 필요한 라이브러리
 from nltk.tokenize import word_tokenize
 from nltk.tag import pos_tag
-# --------------------------------------------
 import nltk
+import re
+import sqlite3
+from image_creation import image_maker
+import os
 
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
@@ -45,6 +46,11 @@ def get_all_predictions(text_sentence, top_k=30, top_clean=30):
         predict = bert_model(input_ids)[0]
     bert = decode(bert_tokenizer, predict[0, mask_idx, :].topk(top_k).indices.tolist(), top_clean)
 
+    bert = re.sub('\S+다\s|\S+요\s', '', bert)
+    bert = re.sub(r'[ㄱ-ㅎ|ㅏ-ㅣ]', '', bert)
+    bert = re.sub(r'[0-9]', '', bert)
+    bert = re.sub(r'[a-z|A-Z]', '', bert)
+
     # 서버로 전달할 형식
     return {'bert': bert}
 
@@ -62,7 +68,8 @@ def get_translate(bert_result):
     # 개인 클라이언트 아이디 반드시 입력할 것!
     client_id = ''
     client_secret = ''
-    # ------------------------g--------------------#
+    # --------------------------------------------#
+
 
 
     url = "https://openapi.naver.com/v1/papago/n2mt"
@@ -80,6 +87,7 @@ def get_translate(bert_result):
 
         if (rescode == 200):
             send_data = response.json()
+
             trans_data = (send_data['message']['result']['translatedText'])
 
             # 소문자화
@@ -117,56 +125,48 @@ def verb_lemmatizer(word_list):
 
 
 # 단일 단어에 대한 이미지 url json 함수 추가
-def image_crawler(trans_result):
+def image_crawler(bert_result, trans_result):
     '''
     :param trans_result: 파파고 api를 거친 리스트
+    :param bert_result : 버트 모델 예측 단어 (픽토그램 결과가 없는 단어를 뽑아낼 때 사용)
     :return: 1. image url이 담긴 딕셔너리
              2. 결과가 있는 단어의 인덱스 리스트
     '''
 
-    word_list = []
+    con = sqlite3.connect('id_pic.db')
+    cur = con.cursor()
+
     image_url = []
 
     for idx, word in enumerate(trans_result):
-        res = requests.get(f'https://api.arasaac.org/api/pictograms/en/bestsearch/{word}')
-        req_json = res.json()
-
         try:
-            pic_id = req_json[0]['_id']
+            cur.execute('SELECT word_id FROM ID_word WHERE ID_word.word == ?', (word,))
+
+            # 단어 id 추출
+            pic_id = cur.fetchone()[0]
 
             # 추출한 id를 토대로 이미지 불러오기
-            img_res = requests.get(
-                f'https://api.arasaac.org/api/pictograms/{pic_id}?plural=false&color=true&resolution=500&skin=assian&hair=black&url=true&download=false')
-            img_json = img_res.json()['image']
-            image_url.append(img_json)
+            img_url =  f'https://api.arasaac.org/api/pictograms/{pic_id}?download=false'
+            image_url.append(img_url)
 
-            # 결과가 있는 단어
-            word_list.append(idx)
 
         except:
-            print('해당되는 픽토그램 없음!', idx)
+            # 결과가 없는 단어
+            no_result_word = bert_result.split()[idx]
+            img_path = f'../word_image/{no_result_word}.png'
 
-    image_url = image_url[:11]
+            # 단어를 확대한 이미지가 폴더에 없을 때 생성
+            if not os.path.isdir(img_path):
+                image_maker(no_result_word)
+                image_url.append(img_path)
 
-    return {'img_url': image_url}, word_list
+            else:
+                image_url.append(img_path)
 
-
-# ----------------------------------------------------------------#
-def find_result_word(bert_result, idx_list):
-    '''
-    :param bert_result: bert가 반환한 예측 단어
-    :param idx_list: 픽트그램 결과가 있는 단어의 인덱스
-    :return: 실제 픽토그램 결과가 존재하는 예측 단어의 리스트를 띄어쓰기 단위로 합친 결과
-    '''
-    valid_result = []
-    for idx in idx_list:
-        valid_word = bert_result.split()[idx]
-        valid_result.append(valid_word)
-
-    # bert 결과로 다시 반환 -> 서버에 전달하여 프론트단에 단어 출력
-    return ' '.join(valid_result)
-# ----------------------------------------------------------------#
-
+    # 데이터베이스 접속 종료
+    cur.close()
+    return {'img_url': image_url}
 
 def init_word():
-    return {'bert': '나는 저는 이제 우리 역시 그러면 너는 당신은 우리 제가 혹시 최정우 아 야 어 여 우 유 개 비 바 재 대'}
+    return {'bert': '나는 저는 저의 제가 우리 너는 당신은 너의 여러분 누구 이 그 저 이제 혹시 오전에 오후에 만약 지금 내일 모래 어제 잠시후에'}
+
