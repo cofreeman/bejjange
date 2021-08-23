@@ -66,9 +66,10 @@ def get_translate(bert_result):
     #--------------------------------------------#
     # 구동할 서버에서 api 아이디 받아야 함
     # 개인 클라이언트 아이디 반드시 입력할 것!
-    client_id = 'mhmeQkNSVw4fOnZ0RuBB'
-    client_secret = 'YrWPO3AGMR'
+    client_id = ''
+    client_secret = ''
     # --------------------------------------------#
+
 
 
     url = "https://openapi.naver.com/v1/papago/n2mt"
@@ -150,9 +151,15 @@ def image_crawler(bert_result, trans_result):
 
 
         except:
+
             # 결과가 없는 단어
             no_result_word = bert_result.split()[idx]
             img_path = f'../word_image/{no_result_word}.png'
+
+            print('해당되는 픽토그램 없음!', idx)
+
+    image_url = image_url[:15]
+
 
             # 단어를 확대한 이미지가 폴더에 없을 때 생성
             if not os.path.isdir(img_path):
@@ -167,4 +174,5 @@ def image_crawler(bert_result, trans_result):
     return {'img_url': image_url}
 
 def init_word():
-    return {'bert': '나는 저는 이제 우리 역시 그러면 너는 당신은 우리 제가 혹시 최정우 아 야 어 여 우 유 개 비 바 재 대'}
+    return {'bert': '나는 저는 저의 제가 우리 너는 당신은 너의 여러분 누구 이 그 저 이제 혹시 오전에 오후에 만약 지금 내일 모래 어제 잠시후에'}
+
