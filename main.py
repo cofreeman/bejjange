@@ -151,15 +151,9 @@ def image_crawler(bert_result, trans_result):
 
 
         except:
-
             # 결과가 없는 단어
             no_result_word = bert_result.split()[idx]
             img_path = f'../word_image/{no_result_word}.png'
-
-            print('해당되는 픽토그램 없음!', idx)
-
-    image_url = image_url[:15]
-
 
             # 단어를 확대한 이미지가 폴더에 없을 때 생성
             if not os.path.isdir(img_path):
