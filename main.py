@@ -51,6 +51,9 @@ def get_all_predictions(text_sentence, top_k=30, top_clean=30):
     bert = re.sub(r'[0-9]', '', bert)
     bert = re.sub(r'[a-z|A-Z]', '', bert)
 
+    # 다중 공백 제거
+    bert = re.sub(r' +', ' ', bert)
+
     # 서버로 전달할 형식
     return {'bert': bert}
 
@@ -66,10 +69,9 @@ def get_translate(bert_result):
     #--------------------------------------------#
     # 구동할 서버에서 api 아이디 받아야 함
     # 개인 클라이언트 아이디 반드시 입력할 것!
-    client_id = ''
-    client_secret = ''
+    client_id = 'mhmeQkNSVw4fOnZ0RuBB'
+    client_secret = 'YrWPO3AGMR'
     # --------------------------------------------#
-
 
 
     url = "https://openapi.naver.com/v1/papago/n2mt"
@@ -96,10 +98,9 @@ def get_translate(bert_result):
         else:
             print("Error Code:", rescode)
 
-    # ------------------------------------------------#
     # verb_lemmatizer 함수 추가
     trans_result = verb_lemmatizer(trans_result)
-    # ------------------------------------------------#
+
 
     return trans_result
 
@@ -124,8 +125,10 @@ def verb_lemmatizer(word_list):
     return word_list
 
 
+
 # 단일 단어에 대한 이미지 url json 함수 추가
 def image_crawler(bert_result, trans_result):
+    print(os.getcwd())
     '''
     :param trans_result: 파파고 api를 거친 리스트
     :param bert_result : 버트 모델 예측 단어 (픽토그램 결과가 없는 단어를 뽑아낼 때 사용)
@@ -153,11 +156,11 @@ def image_crawler(bert_result, trans_result):
         except:
             # 결과가 없는 단어
             no_result_word = bert_result.split()[idx]
-            img_path = f'../word_image/{no_result_word}.png'
+            img_path = f'static/img/word_image/{word}.jpg'
 
             # 단어를 확대한 이미지가 폴더에 없을 때 생성
             if not os.path.isdir(img_path):
-                image_maker(no_result_word)
+                image_maker(word, no_result_word)
                 image_url.append(img_path)
 
             else:
@@ -168,5 +171,4 @@ def image_crawler(bert_result, trans_result):
     return {'img_url': image_url}
 
 def init_word():
-    return {'bert': '나는 저는 저의 제가 우리 너는 당신은 너의 여러분 누구 이 그 저 이제 혹시 오전에 오후에 만약 지금 내일 모래 어제 잠시후에'}
-
+    return {'bert': '나는 저는 이제 우리 역시 그러면 너는 당신은 우리 제가 혹시 최정우 아 야 어 여 우 유 개 비 바 재 대'}
