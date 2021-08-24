@@ -51,6 +51,9 @@ def get_all_predictions(text_sentence, top_k=30, top_clean=30):
     bert = re.sub(r'[0-9]', '', bert)
     bert = re.sub(r'[a-z|A-Z]', '', bert)
 
+    # 다중 공백 제거
+    bert = re.sub(r'\s+', ' ', bert).strip()
+
     # 서버로 전달할 형식
     return {'bert': bert}
 
@@ -58,18 +61,17 @@ def get_all_predictions(text_sentence, top_k=30, top_clean=30):
 # 단일 단어에 대한 번역문
 def get_translate(bert_result):
     '''
-    input : Bert 생성 모델 결과 리스트
-    output : 각 단어에 대한 번역문
+    #input : Bert 생성 모델 결과 리스트
+    #output : 각 단어에 대한 번역문
     '''
     trans_result = []
 
     #--------------------------------------------#
     # 구동할 서버에서 api 아이디 받아야 함
     # 개인 클라이언트 아이디 반드시 입력할 것!
-    client_id = ''
-    client_secret = ''
+    client_id = 'mhmeQkNSVw4fOnZ0RuBB'
+    client_secret = 'YrWPO3AGMR'
     # --------------------------------------------#
-
 
 
     url = "https://openapi.naver.com/v1/papago/n2mt"
@@ -89,27 +91,26 @@ def get_translate(bert_result):
             send_data = response.json()
 
             trans_data = (send_data['message']['result']['translatedText'])
-
+            trans_data = re.sub('\.', '', trans_data)
             # 소문자화
             trans_result.append(trans_data.lower())
 
         else:
             print("Error Code:", rescode)
 
-    # ------------------------------------------------#
     # verb_lemmatizer 함수 추가
     trans_result = verb_lemmatizer(trans_result)
-    # ------------------------------------------------#
+
 
     return trans_result
 
 
 # 파파고 api 번역 결과를 집어넣어 문장에서 동사만 뽑아내는 함수
 def verb_lemmatizer(word_list):
-    '''
-    :param word_list: 파파고 api 번역 결과 리스트
-    :return: 문장으로 번역된 경우 동사만 뽑아낸 리스트
-    '''
+    
+    #:param word_list: 파파고 api 번역 결과 리스트
+    #:return: 문장으로 번역된 경우 동사만 뽑아낸 리스트
+    
     for idx in range(len(word_list)):
         # 문장으로 번역된 경우 (주어 + 동사 + 목적어)
         if len(word_list[idx].split()) >= 2:
@@ -126,6 +127,7 @@ def verb_lemmatizer(word_list):
 
 # 단일 단어에 대한 이미지 url json 함수 추가
 def image_crawler(bert_result, trans_result):
+
     '''
     :param trans_result: 파파고 api를 거친 리스트
     :param bert_result : 버트 모델 예측 단어 (픽토그램 결과가 없는 단어를 뽑아낼 때 사용)
@@ -139,34 +141,37 @@ def image_crawler(bert_result, trans_result):
     image_url = []
 
     for idx, word in enumerate(trans_result):
-        try:
-            cur.execute('SELECT word_id FROM ID_word WHERE ID_word.word == ?', (word,))
+        if word != ' ':
+            try:
+                cur.execute('SELECT word_id FROM ID_word WHERE ID_word.word == ?', (word,))
+                pic_id = cur.fetchone()[0]
 
-            # 단어 id 추출
-            pic_id = cur.fetchone()[0]
-
-            # 추출한 id를 토대로 이미지 불러오기
-            img_url =  f'https://api.arasaac.org/api/pictograms/{pic_id}?download=false'
-            image_url.append(img_url)
+                # 추출한 id를 토대로 이미지 불러오기
+                img_url =  f'https://api.arasaac.org/api/pictograms/{pic_id}?download=false'
+                image_url.append(img_url)
 
 
-        except:
-            # 결과가 없는 단어
-            no_result_word = bert_result.split()[idx]
-            img_path = f'../word_image/{no_result_word}.png'
+            except:
+                # 결과가 없는 단어
+                no_result_word = bert_result.split()[idx]
+                img_path = f'static/img/word_image/{no_result_word}.jpg'
 
-            # 단어를 확대한 이미지가 폴더에 없을 때 생성
-            if not os.path.isdir(img_path):
-                image_maker(no_result_word)
-                image_url.append(img_path)
+                # 단어를 확대한 이미지가 폴더에 없을 때 생성
+                if not os.path.isdir(img_path):
+                    image_maker(no_result_word)
+                    image_url.append(img_path)
 
-            else:
-                image_url.append(img_path)
+                else:
+                    image_url.append(img_path)
 
     # 데이터베이스 접속 종료
     cur.close()
+
+    if len(image_url) < 11:
+        for _ in range(11-len(image_url)):
+            image_url.append(' ')
+
     return {'img_url': image_url}
 
 def init_word():
-    return {'bert': '나는 저는 저의 제가 우리 너는 당신은 너의 여러분 누구 이 그 저 이제 혹시 오전에 오후에 만약 지금 내일 모래 어제 잠시후에'}
-
+    return {'bert': '나는 저는 이제 우리 역시 그러면 너는 당신은 우리 제가 혹시 최정우 아 야 어 여 우 유 개 비 바 재 대'}
