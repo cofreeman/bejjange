@@ -19,13 +19,25 @@ def image_maker(text):
     image = Image.new('RGB', (w, h), color=background)
     draw = ImageDraw.Draw(image)
 
-    lines = textwrap.wrap(text, width=2)
+    if len(text) == 1:
+        lines = textwrap.wrap(text, width=len(text))
+        x_text, y_text = 80, 70
 
-    x_text, y_text = 70, 50
+    elif len(text) == 2:
+        lines = textwrap.wrap(text, width=len(text))
+        x_text, y_text = 70, 70
+
+    elif len(text) == 3:
+        lines = textwrap.wrap(text, width=len(text))
+        x_text, y_text = 50, 70
+
+    elif len(text) > 3:
+        lines = textwrap.wrap(text, width=len(text))
+        x_text, y_text = 50, 70
     
     for line in lines:
         width, height = font.getsize(line)
         draw.text((x_text, y_text), line, font=font, fill=font_col)
         y_text += height
 
-    image.save(f'word_image/{text}.png')
+    image.save(f'static/img/word_image/{text}.jpg')
