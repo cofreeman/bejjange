@@ -1,3 +1,41 @@
+/* ----------------------------- */
+#init_text{
+  display: table;
+  width: 150px;
+  height: 150px;
+  background:#f6b024;
+  margin-top: 10px;
+  margin-left: 20px;
+  border-radius: 5px;
+}
+
+#init_text p{
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  color:white;
+  font-size: 28px;
+}
+#delete{
+  display: table;
+  width: 150px;
+  height: 150px;
+  background:#f6b024;
+  margin-top: 10px;
+  margin-left: 20px;
+  border-radius: 5px;
+}
+
+#delete p{
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  color:white;
+  font-size: 28px;
+}
+
+
+
 .overlay {
 	width: 100%;
 	height: 100%;
@@ -19,7 +57,7 @@ html,body{width:100%;height:100%;}
     color:#fff;
     position: absolute;
     width:80%;
-    left:50%; top:-10%;
+    left:50%; top:10%;
     transform:translate(-50%,50%);
     display: none;
     z-index: 3;
@@ -31,7 +69,7 @@ html,body{width:100%;height:100%;}
     color:#fff;
     position: absolute;
     width:80%;
-    left:50%; top:-10%;
+    left:50%; top:10%;
     transform:translate(-50%,50%);
     display: none;
     z-index: 3;
@@ -48,7 +86,7 @@ html,body{width:100%;height:100%;}
     color:#fff;
     position: absolute;
     width:80%;
-    left:50%; top:-10%;
+    left:50%; top:10%;
     transform:translate(-50%,50%);
     display: none;
     z-index: 3;
@@ -87,7 +125,7 @@ html,body{width:100%;height:100%;}
     color:#fff;
     position: absolute;
     width:95%;
-    left:50%; top:-10%;
+    left:50%; top:10%;
     transform:translate(-50%,50%);
     display: none;
     z-index: 3;
@@ -101,7 +139,7 @@ html,body{width:100%;height:100%;}
     color:#fff;
     position: absolute;
     width:80%;
-    left:50%; top:-10%;
+    left:50%; top:10%;
     transform:translate(-50%,50%);
     display: none;
     z-index: 3;
@@ -113,7 +151,7 @@ html,body{width:100%;height:100%;}
     color:#fff;
     position: absolute;
     width:90%;
-    left:50%; top:10%;
+    left:50%; top:-10%;
     transform:translate(-50%,50%);
     display: none;
     z-index: 3;
@@ -213,25 +251,6 @@ h4 {
 }
 
 article {display: flex; width: 100%; height: 170px;}
-
-#delete{
-  display: table;
-  width: 150px;
-  height: 150px;
-  background:#f6b024;
-  margin-top: 10px;
-  margin-left: 20px;
-  border-radius: 5px;
-}
-
-#delete p{
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-  color:white;
-  font-size: 28px;
-
-}
 
 #init_text{
   display: table;
