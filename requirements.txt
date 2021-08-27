@@ -2,3 +2,8 @@ torch
 transformers
 Flask
 numpy
+re
+nltk
+sqlite3
+pillow
+textwrap
