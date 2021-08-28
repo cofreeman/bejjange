@@ -33,7 +33,9 @@
   color:white;
   font-size: 28px;
 }
-
+.mr{
+    margin-right:5px;
+}
 
 
 .overlay {
