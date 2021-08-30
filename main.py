@@ -51,17 +51,16 @@ def get_all_predictions(text_sentence, top_k=30, top_clean=30):
         predict = bert_model(input_ids)[0]
     bert = decode(bert_tokenizer, predict[0, mask_idx, :].topk(top_k).indices.tolist(), top_clean)
 
-    # bert = re.sub('\S+다\s|\S+요\s', '', bert)
+    if text_sentence[-1] not in ['.', '?', '!']:
+        bert = re.sub('\S+다\s|\S+요\s', '', bert)
 
+    bert = re.sub('등', '', bert)
     # 단일 자음 제외
     bert = re.sub(r'[ㄱ-ㅎ|ㅏ-ㅣ]', '', bert)
-
     # 숫자 제외
     bert = re.sub(r'[0-9]', '', bert)
-
     # 단일 알파벳 제외
     bert = re.sub(r'[a-z|A-Z]', '', bert)
-
     # 다중 공백 제거
     bert = re.sub(r'\s+', ' ', bert).strip()
 
@@ -177,9 +176,10 @@ def image_crawler(bert_result, trans_result):
 
     # 데이터베이스 접속 종료
     cur.close()
-
-    if len(image_url) < 11:
-        for _ in range(11-len(image_url)):
+    
+    # 예측 단어가 25개 미만일 경우 흰 이미지를 띄우게 함
+    if len(image_url) < 25:
+        for _ in range(25-len(image_url)):
             image_url.append(' ')
 
     return {'img_url': image_url}
