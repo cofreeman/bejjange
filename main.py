@@ -1,15 +1,20 @@
 # %%
+from gtts import gTTS
+from image_creation import image_maker
+from IPython.display import Audio
+from nltk.tag import pos_tag
+from transformers import BertTokenizer, BertForMaskedLM
+from nltk.tokenize import word_tokenize
 import torch
 import string
 import requests
-from transformers import BertTokenizer, BertForMaskedLM
-from nltk.tokenize import word_tokenize
-from nltk.tag import pos_tag
+
 import nltk
 import re
 import sqlite3
-from image_creation import image_maker
 import os
+
+
 
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
@@ -46,9 +51,15 @@ def get_all_predictions(text_sentence, top_k=30, top_clean=30):
         predict = bert_model(input_ids)[0]
     bert = decode(bert_tokenizer, predict[0, mask_idx, :].topk(top_k).indices.tolist(), top_clean)
 
-    bert = re.sub('\S+다\s|\S+요\s', '', bert)
+    # bert = re.sub('\S+다\s|\S+요\s', '', bert)
+
+    # 단일 자음 제외
     bert = re.sub(r'[ㄱ-ㅎ|ㅏ-ㅣ]', '', bert)
+
+    # 숫자 제외
     bert = re.sub(r'[0-9]', '', bert)
+
+    # 단일 알파벳 제외
     bert = re.sub(r'[a-z|A-Z]', '', bert)
 
     # 다중 공백 제거
@@ -69,8 +80,8 @@ def get_translate(bert_result):
     #--------------------------------------------#
     # 구동할 서버에서 api 아이디 받아야 함
     # 개인 클라이언트 아이디 반드시 입력할 것!
-    client_id = ''
-    client_secret = ''
+    client_id = 'mhmeQkNSVw4fOnZ0RuBB'
+    client_secret = 'YrWPO3AGMR'
     # --------------------------------------------#
 
 
@@ -172,6 +183,18 @@ def image_crawler(bert_result, trans_result):
             image_url.append(' ')
 
     return {'img_url': image_url}
+
+# TTS 구현 함수 / 추가 X
+# 구글 tts에서 완성된 문장을 mp3로 저장하여 차후 play 기능 구현
+def play_tts(text):
+    tts = gTTS(
+        text=text,
+        lang='ko', slow=False
+    )
+    tts.save(f'{text}.mp3')
+
+    Audio(f'{text}.mp3', autoplay=True)
+
 
 def init_word():
     return {'bert': '나는 저는 저의 제가 우리 너는 당신은 너의 여러분 누구 이 그 저 이제 혹시 오전에 오후에 만약 지금 내일 모래 어제 잠시후에'}

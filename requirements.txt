@@ -7,3 +7,4 @@ nltk
 sqlite3
 pillow
 textwrap
+gtts
