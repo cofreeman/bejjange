@@ -45,6 +45,12 @@
     - 지우기 : 잘못 선택한 단어를 취소하여 기존 상태로 되돌림
     - 초기화 : 문장 초기화 
 
+
+##실행 화면
+![image](https://user-images.githubusercontent.com/70828640/137884410-d4b05322-272b-4994-bf7c-10efe83b86bf.png)
+![image](https://user-images.githubusercontent.com/70828640/137884973-ad2b59c6-ef66-4188-ab9e-bfaf36ef9597.png)
+![image](https://user-images.githubusercontent.com/70828640/137885869-de51d7cb-1b5d-4e05-b4c5-0304b2356e81.png)
+
 ## 제작 언어
 * Front-end : HTML, jQuery
 * Back-end : Flask
