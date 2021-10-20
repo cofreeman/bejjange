@@ -3,7 +3,15 @@ var token = ""
 //var imnum = 1;
 
 jQuery(window).ready(function () {
-
+//1. type : "POST" POST 형식의 type으로 전송.
+//2. url   : Back End에서 받을 요청 url.
+//3. dataType : data type을 'json'형식으로 전송
+//4. contentType : 컨텐트 타입을 'application/json'으로 전송
+//5. data : test라는 json객채를 JSON.stringify형식으로 전송
+//6. done : 정상적으로 성공할 경우 함수 실행(버트모델 출력인 단어와 사진을 가져와서 각 버튼의 자리에 알맞게 단어와 사진을 배치합니다)
+//7. fail : 에러 발생시 콘솔로그를 이용해 제이슨 데이터 형태 출력
+    
+//주어진 문장의 다음 단어가 무엇이 적합할지 예측해줍니다
     $('#btn-process-prediction').on('click', function () {
         $.ajax({
             url: '/get_end_predictions.html',
@@ -44,6 +52,8 @@ jQuery(window).ready(function () {
             console.log(jsondata)
         });
     })
+    
+//문장을 .으로 종결하고싶을 때 마지막 단어로 올 수 있는 단어들을 예측해줍니다
     $('#btn-process-jum').on('click', function () {
         $.ajax({
             url: '/get_end_predictions_jum.html',
@@ -84,6 +94,8 @@ jQuery(window).ready(function () {
             console.log(jsondata)
         });
     })
+    
+//문장을 ?로 종결하고싶을 때 마지막 단어로 올 수 있는 단어들을 예측해줍니다
     $('#btn-process-question').on('click', function () {
         $.ajax({
             url: '/get_end_predictions_question.html',
@@ -123,6 +135,8 @@ jQuery(window).ready(function () {
             console.log(jsondata)
         });
     })
+    
+//문장을 !으로 종결하고싶을 때 마지막 단어로 올 수 있는 단어들을 예측해줍니다
     $('#btn-process-nuggimpyo').on('click', function () {
         $.ajax({
             url: '/get_end_predictions_nuggimpyo.html',
@@ -162,6 +176,8 @@ jQuery(window).ready(function () {
             console.log(jsondata)
         });
     })
+    
+//문장의 시작에 올 수 있는 단어를 추천해줌으로써 문장 생성을 편하게 할 수  ex)나 너 우리 저희 
     $('#btn-process-init').on('click', function () {
         $.ajax({
             url: '/get_end_predictions_init.html',
@@ -201,6 +217,7 @@ jQuery(window).ready(function () {
         });
     })
 
+//그림을 잘 못 클릭하거나 다른 선택지를 고르고 싶을 경우 delete버튼을 눌러 마지막 단어와 그림을 지워줍니다 남아있는 단어로 예상 단어를 자동으로 다시 예측 
     $('#delete').click(function(){
         var word = $('#input_text').val();
         if (word.slice(-1) == ' '){
@@ -254,6 +271,8 @@ jQuery(window).ready(function () {
             console.log(jsondata)
         });
     });
+    
+//이미지 버튼을 클릭하면 상단에 단어와 그림이 입력됩니다 그 후 입력된 단어에 따라 다음 예상 단어 예측을 자동으로 실행합니다  
     $('#img-btn1').click(function(){
         var predict1 = $('#predict1').val();
         var im1 = $('#image1').attr('src');
@@ -3934,7 +3953,7 @@ jQuery(window).ready(function () {
         $('body').addClass('active');
     });
 
-
+// 특정 단어를 빠르게 선택하게 도와주는 카테고리를 열고 닫는다
     $('#img-btn-cafe').click(function(){
         $('.dialog-cafe').show();
         $('.dialog2').hide();
@@ -3982,7 +4001,7 @@ jQuery(window).ready(function () {
         $('body').removeClass('active');
     });
 
-
+// 숫자버튼을 클릭하고 완성한 숫자를 단어와 그림으로 상단에 넣어준다.
     $('#btn-close-num').click(function(){
         $('.dialog-num').hide();
         $('body').removeClass('active');
@@ -4059,7 +4078,7 @@ jQuery(window).ready(function () {
         $('body').removeClass('active');
     });
 
-//     더 보기버튼 클릭시 입력 내용없으면 init 단어 보여주기
+//   문장의 시작이나 예측된 단어에 원하는 결과가 없을 경우 img-more버튼을 클릭하면 더 많은 보기를 보여준다.
     $('#img-more').click(function(){
         var word = $('#input_text').val();
         if (word.slice(0) == '' ){
