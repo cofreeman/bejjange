@@ -2,6 +2,7 @@
 >저희는 데이터 청년캠퍼스 한국외국어대학교 과정 B반 3조입니다.
 >본 프로젝트는 자연어처리 과정 심화프로젝트에서 제작한 서비스입니다.
 >평소 의사소통에 어려움을 가지는 장애인을 위해 단어 예측을 기반으로 픽토그램을 불러들여 더욱 빠르고 정확하게 의사소통을 할 수 있도록 보조합니다.
+
 ## 사용 모델
 시중에 공개된 Bert-ko-base 모델을 사용하여 서비스를 제작했습니다.
 
@@ -50,6 +51,7 @@
 ![image](https://user-images.githubusercontent.com/70828640/137884410-d4b05322-272b-4994-bf7c-10efe83b86bf.png)
 ![image](https://user-images.githubusercontent.com/70828640/137884973-ad2b59c6-ef66-4188-ab9e-bfaf36ef9597.png)
 ![image](https://user-images.githubusercontent.com/70828640/137885869-de51d7cb-1b5d-4e05-b4c5-0304b2356e81.png)
+
 
 ## 디렉토리 구조
 ```bash
@@ -121,3 +123,4 @@ cd '폴더 이름'
 
 python app.py
 ```
+Open your browser <a href="http://localhost:8000">http://localhost:8000</a>
