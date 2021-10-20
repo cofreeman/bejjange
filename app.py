@@ -25,6 +25,7 @@ def howtouse():
     return render_template('howtouse.html')
 
 
+//주어진 문장의 마지막으로 올만한 단어를 예측해준다. 
 
 @app.route('/get_end_predictions.html', methods=['post'])
 def get_prediction_eos():
@@ -45,7 +46,7 @@ def get_prediction_eos():
         print(err)
         return app.response_class(response=json.dumps(err), status=500, mimetype='application/json')
 
-
+//주어진 문장을 .으로 끝내고 싶을때 마지막으로 올만한 단어를 예측해준다. 
 @app.route('/get_end_predictions_jum.html', methods=['post'])
 def get_prediction_eos_jum():
     try:
@@ -64,6 +65,7 @@ def get_prediction_eos_jum():
         print(err)
         return app.response_class(response=json.dumps(err), status=500, mimetype='application/json')
 
+//주어진 문장을 ?으로 끝내고 싶을때 마지막으로 올만한 단어를 예측해준다. 
 
 @app.route('/get_end_predictions_question.html', methods=['post'])
 def get_prediction_eos_question():
@@ -83,6 +85,7 @@ def get_prediction_eos_question():
         print(err)
         return app.response_class(response=json.dumps(err), status=500, mimetype='application/json')
 
+//주어진 문장을 !으로 끝내고 싶을때 마지막으로 올만한 단어를 예측해준다. 
 
 @app.route('/get_end_predictions_nuggimpyo.html', methods=['post'])
 def get_prediction_eos_nuggimpyo():
@@ -102,7 +105,7 @@ def get_prediction_eos_nuggimpyo():
         print(err)
         return app.response_class(response=json.dumps(err), status=500, mimetype='application/json')
 
-
+//문장의 첫단어가 될 만한 단어 가져온다.
 @app.route('/get_end_predictions_init.html', methods=['post'])
 def get_prediction_eos_init():
     try:
