@@ -51,6 +51,60 @@
 ![image](https://user-images.githubusercontent.com/70828640/137884973-ad2b59c6-ef66-4188-ab9e-bfaf36ef9597.png)
 ![image](https://user-images.githubusercontent.com/70828640/137885869-de51d7cb-1b5d-4e05-b4c5-0304b2356e81.png)
 
+## 디렉토리 구조
+```bash
+├── README.md
+├── templates/
+│   ├── index.html           - 상징(픽토그램)으로 말하기
+│   ├── main.html            - 메인화면
+│   ├── eboard.html          - 긴급의사소통판
+│   ├── howtouse.html        - 이용방법
+├── static/
+│   ├── css/
+│       ├── app.css
+│       ├── style.css
+│       ├── bootstrap.min.css
+│       ├── bootstrap-suggest.css
+│   ├── img/
+│       ├── eboard/
+│           ├── emergency.png
+│       ├── cate/
+│           ├── cate-cafe/
+│       ├── dogu/
+│       ├── about-bg.png
+│       ├── favicon.png
+│       ├── favicon-1.png
+│       ├── apple-touch-icon.png
+│       ├── apple-touch-icon-1.png
+│       ├── contact-bg.png
+│       ├── cta-bg.png
+│       ├── hero-bg.png
+│       ├── why-us.png
+│   ├── js/
+│       ├── app.js
+│       ├── main.js
+│       ├── bootstrap.min.js
+│       ├── bootstrap-suggest.js
+│       ├── jquery-3.4.1.min.js
+│   ├── vendor/
+│       ├── animate.css/
+│       ├── aos/
+│       ├── bootstrap/
+│       ├── bootstrap-icons/
+│       ├── boxicons/
+│       ├── glightbox/
+│       ├── isotope-layout/
+│       ├── php-email-form/
+│       ├── remixicon/
+│       ├── swiper/
+├── app.py
+├── main.py
+├── image_creation.py
+├── requirements.txt
+├── id_pic.db
+└── word_image/
+```
+
 ## 제작 언어
 * Front-end : HTML, jQuery
 * Back-end : Flask
@@ -62,9 +116,8 @@
 ## 실행 방법
 실행 파일 : app.py
 
+```bash
 cd '폴더 이름'
 
 python app.py
-
-
-
+```
