@@ -48,9 +48,9 @@
 
 
 ##실행 화면
-![image](https://user-images.githubusercontent.com/70828640/137884410-d4b05322-272b-4994-bf7c-10efe83b86bf.png)
-![image](https://user-images.githubusercontent.com/70828640/137884973-ad2b59c6-ef66-4188-ab9e-bfaf36ef9597.png)
-![image](https://user-images.githubusercontent.com/70828640/137885869-de51d7cb-1b5d-4e05-b4c5-0304b2356e81.png)
+![image](https://user-images.githubusercontent.com/70828640/138577714-4555d5c1-40e2-4fb3-8d31-b8cfe45cf691.png)
+![image](https://user-images.githubusercontent.com/70828640/138577726-bf165d59-06c1-435f-9f79-8910951ea255.png)
+![image](https://user-images.githubusercontent.com/70828640/138577762-d83275bb-b0e4-44e0-86b4-58af8c7589e7.png)
 
 
 ## 디렉토리 구조
