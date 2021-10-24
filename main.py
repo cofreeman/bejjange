@@ -8,19 +8,137 @@ from nltk.tokenize import word_tokenize
 import torch
 import string
 import requests
-
+import transformers
+from torch.utils.data import DataLoader, Dataset
+import torch
+import json
+from sklearn.model_selection import train_test_split
 import nltk
 import re
 import sqlite3
 import os
-
-
+import torch
+from torch.utils.tensorboard import SummaryWriter
+writer = SummaryWriter()
+import transformers
+from torch.utils.data import DataLoader, Dataset
+import torch
+import json
+from sklearn.model_selection import train_test_split
+from transformers.data.data_collator import DataCollatorForLanguageModeling
 
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
 
 bert_tokenizer = BertTokenizer.from_pretrained('kykim/bert-kor-base')
 bert_model = BertForMaskedLM.from_pretrained('kykim/bert-kor-base').eval()
+with open('C:/intersentence.json',encoding='UTF-8') as f:
+  inter = json.load(f)
+with open('C:/intrasentence.json',encoding='UTF-8') as f:
+  intra = json.load(f)
+
+inter_con = [e['context'] for e in inter]
+sentence = []
+for e in inter:
+  sentence.append(e['context'])
+  for s in e['sentences']:
+    if s['gold_label'] == 'anti-stereotype':
+      sentence.append(s['sentence'])
+intra_con = [e['context'] for e in intra]
+
+for e in intra:
+  for s in e['sentences']:
+    if s['gold_label'] == 'anti-stereotype':
+      sentence.append(s['sentence'])
+
+x_train, x_test = train_test_split(sentence, test_size=0.2, shuffle=True)
+x_valid, x_test = train_test_split(x_test, test_size=0.5, shuffle=True)
+
+train_encodings = bert_tokenizer(x_train, truncation=True, padding=True, max_length=None)
+val_encodings = bert_tokenizer(x_valid, truncation=True, padding=True, max_length=None)
+test_encodings = bert_tokenizer(x_test, truncation=True, padding=True, max_length=None)
+
+#map-style dataset
+class Dataset(Dataset):
+    def __init__(self, encodings):
+        self.encodings = encodings
+
+    def __getitem__(self, idx):
+        item = {key: torch.tensor(val[idx]) for key, val in self.encodings.items()}
+        return item
+
+    def __len__(self):
+        return len(self.encodings)
+
+train_dataset = Dataset(train_encodings)
+val_dataset = Dataset(val_encodings)
+test_dataset = Dataset(test_encodings)
+
+collator = DataCollatorForLanguageModeling(bert_tokenizer)
+
+
+#mini batch 생성
+#길이가 변하는 input을 처리하기 위해 collator 함수 재정의
+train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True, collate_fn=collator)
+val_loader = DataLoader(val_dataset, batch_size=4, shuffle=True, collate_fn=collator)
+
+for batch in train_loader:
+  bert_model(**batch)
+  break
+
+batch = next(iter(train_loader))
+
+bert_model(**batch)
+
+from transformers import AdamW
+
+optimizer = AdamW(bert_model.parameters(), lr=5e-5)
+
+from transformers import get_scheduler
+
+num_epochs = 100
+num_training_steps = num_epochs * len(train_loader)
+lr_scheduler = get_scheduler(
+    "linear",
+    optimizer=optimizer,
+    num_warmup_steps=0,
+    num_training_steps=num_training_steps
+)
+
+import torch
+
+device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+bert_model.to(device)
+
+from tqdm.auto import tqdm
+
+progress_bar = tqdm(range(num_training_steps))
+
+#모델을 학습 모드로 변환
+bert_model.train()
+
+for epoch in range(num_epochs):
+    for batch in train_loader:
+        batch = {k: v.to(device) for k, v in batch.items()}
+        outputs = bert_model(**batch)
+        loss = outputs.loss
+        writer.add_scalar("Loss/train", loss, epoch) #시각화
+        loss.backward()
+
+        optimizer.step()
+        lr_scheduler.step()
+        optimizer.zero_grad()
+        progress_bar.update(1)
+
+writer.flush() #시각화
+
+#시각화 스트림 종료
+writer.close()
+
+transformers.logging.set_verbosity_error()
+
+
+bert_model.eval()
 
 
 def decode(tokenizer, pred_idx, top_clean):
