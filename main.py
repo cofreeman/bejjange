@@ -34,19 +34,11 @@ bert_tokenizer = BertTokenizer.from_pretrained('kykim/bert-kor-base')
 bert_model = BertForMaskedLM.from_pretrained('kykim/bert-kor-base').eval()
 with open('C:/intersentence.json',encoding='UTF-8') as f:
   inter = json.load(f)
-with open('C:/intrasentence.json',encoding='UTF-8') as f:
-  intra = json.load(f)
 
 inter_con = [e['context'] for e in inter]
 sentence = []
 for e in inter:
   sentence.append(e['context'])
-  for s in e['sentences']:
-    if s['gold_label'] == 'anti-stereotype':
-      sentence.append(s['sentence'])
-intra_con = [e['context'] for e in intra]
-
-for e in intra:
   for s in e['sentences']:
     if s['gold_label'] == 'anti-stereotype':
       sentence.append(s['sentence'])
@@ -76,16 +68,20 @@ test_dataset = Dataset(test_encodings)
 
 collator = DataCollatorForLanguageModeling(bert_tokenizer)
 
-
 #mini batch 생성
 #길이가 변하는 input을 처리하기 위해 collator 함수 재정의
-train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True, collate_fn=collator)
-val_loader = DataLoader(val_dataset, batch_size=4, shuffle=True, collate_fn=collator)
+train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True, collate_fn=collator)
+val_loader = DataLoader(val_dataset, batch_size=32, shuffle=True, collate_fn=collator)
 
 for batch in train_loader:
   bert_model(**batch)
   break
 
+for batch in val_loader:
+  bert_model(**batch)
+  break
+
+#위에랑 같음
 batch = next(iter(train_loader))
 
 bert_model(**batch)
@@ -96,7 +92,7 @@ optimizer = AdamW(bert_model.parameters(), lr=5e-5)
 
 from transformers import get_scheduler
 
-num_epochs = 100
+num_epochs = 1000
 num_training_steps = num_epochs * len(train_loader)
 lr_scheduler = get_scheduler(
     "linear",
@@ -114,32 +110,59 @@ from tqdm.auto import tqdm
 
 progress_bar = tqdm(range(num_training_steps))
 
-#모델을 학습 모드로 변환
-bert_model.train()
+# 모델을 학습 모드로 변환
+
+# bert_model.train() # 여기서 할 필요 없음
+
+eval_step = 1
+patience = 0  # 3이면 학습 종료
+end_step = 100
+
+best_loss = float('inf')  # 무한대로 설정
 
 for epoch in range(num_epochs):
+    # train loop
+    bert_model.train()  # 이거 안붙이면 첫 번째 validation loop에서 eval()한 상태로 계속 진행됨
     for batch in train_loader:
         batch = {k: v.to(device) for k, v in batch.items()}
         outputs = bert_model(**batch)
         loss = outputs.loss
-        writer.add_scalar("Loss/train", loss, epoch) #시각화
-        loss.backward()
+        writer.add_scalar("Loss/train", loss, epoch)  # 시각화
+        loss.backward()  #
 
         optimizer.step()
         lr_scheduler.step()
         optimizer.zero_grad()
         progress_bar.update(1)
 
-writer.flush() #시각화
+    if epoch % eval_step == 0:
+        bert_model.eval()
+        total_val_loss = 0
+        for batch in val_loader:
+            batch = {k: v.to(device) for k, v in batch.items()}
+            with torch.no_grad():  # evaluation loop에서 이거 붙여야 빨라짐
+                outputs = bert_model(**batch)
+                total_val_loss += outputs.loss
 
-#시각화 스트림 종료
+        total_val_loss /= len(val_loader)
+        writer.add_scalar("Loss/validation", total_val_loss, epoch)  # 시각화
+
+        if (total_val_loss < best_loss):
+            best_loss = total_val_loss
+        else:
+            patience += 1
+
+        if (patience == end_step):
+            break
+
+writer.flush()  # 시각화
+
+# #시각화 스트림 종료
 writer.close()
 
 transformers.logging.set_verbosity_error()
 
-
 bert_model.eval()
-
 
 def decode(tokenizer, pred_idx, top_clean):
     ignore_tokens = string.punctuation + '[PAD][UNK]<pad><unk> '
